@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="@dimen/navigation_drawer_width"
+                android:layout_height="30dp"
+                android:id="@+id/imageViewBar1"
+                android:src="@android:color/darker_gray" />
+
+            <TextView
+                android:id="@+id/textViewArtesianCategories"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Artesian Blends"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/goldtext"
+                android:layout_marginLeft="5dp"
+                android:layout_marginBottom="5dp" />
+
+            <ListView
+                android:id="@+id/listviewArtesianCategories"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/navigation_list_height" />
+
+            <ImageView
+                android:layout_width="@dimen/navigation_drawer_width"
+                android:layout_height="30dp"
+                android:id="@+id/imageViewBar2"
+                android:src="@android:color/darker_gray" />
+
+            <TextView
+                android:id="@+id/textViewPremiumBrands"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Premium Brands"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/goldtext"
+                android:layout_marginLeft="5dp"
+                android:layout_marginBottom="5dp" />
+
+            <ListView
+                android:id="@+id/listviewPremiumBrands"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/navigation_list_height" />
+
+        </LinearLayout>
+
+
+</RelativeLayout>
