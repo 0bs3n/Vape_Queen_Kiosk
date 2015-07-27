@@ -14,6 +14,7 @@ import com.thevapequeen.vapequeenkiosk.housejuices.ArtesianBlend;
 import com.thevapequeen.vapequeenkiosk.housejuices.ArtesianBlendAdapter;
 import com.thevapequeen.vapequeenkiosk.navigation.JuiceViewFragment;
 import com.thevapequeen.vapequeenkiosk.navigation.NavigationDrawerFragment;
+import com.thevapequeen.vapequeenkiosk.navigation.OnNavItemClickListener;
 import com.thevapequeen.vapequeenkiosk.premiumjuices.PremiumJuice;
 import com.thevapequeen.vapequeenkiosk.premiumjuices.PremiumJuiceAdapter;
 
@@ -33,7 +34,7 @@ public class MainActivity extends FragmentActivity
 
 
     private NavigationDrawerFragment mNavigationDrawerFragment;
-    private JuiceViewFragment mJuiceViewFragment;
+    public static JuiceViewFragment mJuiceViewFragment;
 
     public static ArtesianBlendAdapter artesianBlendAdapter;
     public static PremiumJuiceAdapter premiumJuiceAdapter;
@@ -58,6 +59,8 @@ public class MainActivity extends FragmentActivity
         premiumJuiceFile = getString(R.string.premium_juice_file);
         setupArtesianJuiceList();
         setupPremiumJuiceList();
+
+        mJuiceViewFragment = (JuiceViewFragment)getSupportFragmentManager().findFragmentById(R.id.main_screen);
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
@@ -105,6 +108,10 @@ public class MainActivity extends FragmentActivity
     @Override
     public void onFragmentInteraction(Uri uri) {
     //This callback to JuiceView must remain empty for custom layout
+    }
+
+    public static void changeJuiceFragText(){
+        mJuiceViewFragment.changeText(OnNavItemClickListener._mCategory);
     }
 
     private void setupKioskState() {
@@ -170,6 +177,10 @@ public class MainActivity extends FragmentActivity
                 }
             }
         }
+    }
+
+    public void refreshJuiceViewFragment(){
+
     }
 
 

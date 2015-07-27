@@ -11,6 +11,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.thevapequeen.vapequeenkiosk.MainActivity;
 import com.thevapequeen.vapequeenkiosk.R;
 
 /*
@@ -31,7 +32,7 @@ public class OnNavItemClickListener implements OnItemClickListener {
         // get the clicked item name
         String listItemText = textViewItem.getText().toString();
         _mCategory = listItemText;
-
+        MainActivity.changeJuiceFragText();
         // just toast it
         Toast.makeText(context,_mCategory, Toast.LENGTH_LONG).show();
         NavigationDrawerFragment.mDrawerLayout.closeDrawer(NavigationDrawerFragment.mFragmentContainerView);
