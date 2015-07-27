@@ -32,13 +32,11 @@ public class OnNavItemClickListener implements OnItemClickListener {
         String listItemText = textViewItem.getText().toString();
         _mCategory = listItemText;
 
-        //create proper list and assign it to the proper MainActivity list
-        //Refresh notify adapter
-        //MainActivity.mlistViewMainArtesian.setVisibility(View.VISIBLE);
-
         // just toast it
-        Toast.makeText(context, _mCategory, Toast.LENGTH_LONG).show();
+        Toast.makeText(context,_mCategory, Toast.LENGTH_LONG).show();
         NavigationDrawerFragment.mDrawerLayout.closeDrawer(NavigationDrawerFragment.mFragmentContainerView);
+
+        JuiceViewFragment.newInstance(_mCategory);
     }
 
 

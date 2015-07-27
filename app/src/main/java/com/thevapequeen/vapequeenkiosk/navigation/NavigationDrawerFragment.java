@@ -95,7 +95,6 @@ public class NavigationDrawerFragment extends Fragment {
         mDrawerPremiumListView = (ListView) v.findViewById(R.id.listviewPremiumBrands);
         mDrawerPremiumListView.setAdapter(new JuiceNavAdapter(premiumNavJuice, inflater));
         mDrawerPremiumListView.setOnItemClickListener(new OnNavItemClickListener());
-
         return v;
     }
 

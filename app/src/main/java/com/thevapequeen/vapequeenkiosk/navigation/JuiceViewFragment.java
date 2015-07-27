@@ -6,11 +6,13 @@ import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.thevapequeen.vapequeenkiosk.R;
 
@@ -23,14 +25,15 @@ import com.thevapequeen.vapequeenkiosk.R;
  * create an instance of this fragment.
  */
 public class JuiceViewFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
+
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
 
     ImageView imageViewMain;
+    TextView textViewMain;
+
     public static Integer ticklecounter = 0;
 
     private OnFragmentInteractionListener mListener;
@@ -42,7 +45,7 @@ public class JuiceViewFragment extends Fragment {
      * @param param1 Parameter 1.
      * @return A new instance of fragment JuiceViewFragment.
      */
-    // TODO: Rename and change types and number of parameters
+
     public static JuiceViewFragment newInstance(String param1) {
         JuiceViewFragment fragment = new JuiceViewFragment();
         Bundle args = new Bundle();
@@ -60,6 +63,7 @@ public class JuiceViewFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
+            Log.v("**JUICEFRAG**",mParam1);
         }
 
     }
@@ -69,6 +73,9 @@ public class JuiceViewFragment extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_juice_view, container, false);
         assert v != null;
+
+        textViewMain = (TextView)v.findViewById(R.id.textViewJuiceView);
+        textViewMain.setText(mParam1);
 
         imageViewMain = (ImageView)v.findViewById(R.id.imageViewJuiceFragment);
         imageViewMain.setOnTouchListener(new View.OnTouchListener() {
@@ -128,7 +135,7 @@ public class JuiceViewFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
+
         public void onFragmentInteraction(Uri uri);
     }
 
