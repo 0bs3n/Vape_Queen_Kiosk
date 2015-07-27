@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -32,6 +31,7 @@ public class JuiceViewFragment extends Fragment {
     private String mParam1;
 
     ImageView imageViewMain;
+
     TextView textViewMain;
 
     public static Integer ticklecounter = 0;
@@ -63,7 +63,7 @@ public class JuiceViewFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
-            Log.v("**JUICEFRAG**",mParam1);
+
         }
 
     }
@@ -74,10 +74,8 @@ public class JuiceViewFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_juice_view, container, false);
         assert v != null;
 
-        textViewMain = (TextView)v.findViewById(R.id.textViewJuiceView);
-        textViewMain.setText(mParam1);
-
         imageViewMain = (ImageView)v.findViewById(R.id.imageViewJuiceFragment);
+        imageViewMain.setImageResource(R.drawable.logo);
         imageViewMain.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -97,14 +95,9 @@ public class JuiceViewFragment extends Fragment {
             }
         });
 
-        return v;
-    }
+        textViewMain = (TextView)v.findViewById(R.id.textViewJuiceFragment);
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
+        return v;
     }
 
     @Override

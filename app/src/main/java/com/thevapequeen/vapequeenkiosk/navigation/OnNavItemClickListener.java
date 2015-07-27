@@ -36,7 +36,6 @@ public class OnNavItemClickListener implements OnItemClickListener {
         Toast.makeText(context,_mCategory, Toast.LENGTH_LONG).show();
         NavigationDrawerFragment.mDrawerLayout.closeDrawer(NavigationDrawerFragment.mFragmentContainerView);
 
-        JuiceViewFragment.newInstance(_mCategory);
     }
 
 

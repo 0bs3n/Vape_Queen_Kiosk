@@ -18,7 +18,6 @@ import com.thevapequeen.vapequeenkiosk.premiumjuices.PremiumJuice;
 import com.thevapequeen.vapequeenkiosk.premiumjuices.PremiumJuiceAdapter;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -105,7 +104,7 @@ public class MainActivity extends FragmentActivity
 
     @Override
     public void onFragmentInteraction(Uri uri) {
-        //This callback to JuiceView must remain empty for custom layout
+    //This callback to JuiceView must remain empty for custom layout
     }
 
     private void setupKioskState() {
@@ -135,9 +134,7 @@ public class MainActivity extends FragmentActivity
                 String[] _artesianjuice = line.split(cvsSplitBy);
                 artesianBlendList.add(new ArtesianBlend(_artesianjuice[0],_artesianjuice[1],_artesianjuice[2],_artesianjuice[3],_artesianjuice[4],_artesianjuice[5]));
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        }  catch (IOException e) {
             e.printStackTrace();
         } finally {
             if (br != null) {
@@ -162,8 +159,6 @@ public class MainActivity extends FragmentActivity
                 String[] _premiumjuice = line.split(cvsSplitBy);
                 premiumJuiceList.add(new PremiumJuice(_premiumjuice[0],_premiumjuice[1],_premiumjuice[2],_premiumjuice[3],_premiumjuice[4],_premiumjuice[5]));
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
