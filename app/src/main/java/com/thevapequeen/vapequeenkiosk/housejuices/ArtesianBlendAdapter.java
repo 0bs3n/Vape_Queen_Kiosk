@@ -59,19 +59,27 @@ public class ArtesianBlendAdapter extends BaseAdapter {
         final ViewItem itemAdapter;
 
         if (convertView == null) {
-            convertView = vi.inflate(R.layout.item_navigation, null);
+            convertView = vi.inflate(R.layout.item_artesian_blend, null);
             itemAdapter = new ViewItem();
-            itemAdapter.jImage = (ImageView) convertView.findViewById(R.id.imageViewNavItem);
-            itemAdapter.jName = (TextView) convertView
-                    .findViewById(R.id.textViewNavItem);
+            itemAdapter.jImage = (ImageView) convertView.findViewById(R.id.imageViewHouseJuice);
+            itemAdapter.jName = (TextView) convertView.findViewById(R.id.textViewHouseName);
+            itemAdapter.jDescription = (TextView) convertView.findViewById(R.id.textViewHouseDescription);
+            itemAdapter.jVG = (TextView) convertView.findViewById(R.id.textViewHouseVG);
+            itemAdapter.jPG = (TextView) convertView.findViewById(R.id.textViewHousePG);
+            itemAdapter.jNumber = (TextView) convertView.findViewById(R.id.textViewHouseNumber);
             convertView.setTag(itemAdapter);
         } else {
             itemAdapter = (ViewItem) convertView.getTag();
         }
         ArtesianBlend currentJuice = artesianElements.get(position);
+
         // Add received info to UI
-        //itemAdapter.jImage.setImageBitmap(Bitmap);
+        itemAdapter.jImage.setImageResource(R.drawable.logo_thumbnail);
         itemAdapter.jName.setText(currentJuice.getVqName());
+        itemAdapter.jDescription.setText(currentJuice.getVqDescription());
+        itemAdapter.jVG.setText(currentJuice.getVqVGratio());
+        itemAdapter.jPG.setText(currentJuice.getVqPGratio());
+        itemAdapter.jNumber.setText(currentJuice.getVqNumber());
 
         return convertView;
     }
@@ -79,6 +87,10 @@ public class ArtesianBlendAdapter extends BaseAdapter {
     private class ViewItem {
         ImageView jImage;
         TextView jName;
+        TextView jDescription;
+        TextView jVG;
+        TextView jPG;
+        TextView jNumber;
 
     }
 

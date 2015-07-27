@@ -1,13 +1,10 @@
 package com.thevapequeen.vapequeenkiosk.housejuices;
 
-import android.graphics.Bitmap;
-
 /**
  * Created by James Campbell for exclusive use by The Vape Queen. All rights reserved.
  */
 public class ArtesianBlend {
 
-    Bitmap vqBitmap;
     String vqNumber;
     String vqName;
     String vqVGratio;
@@ -36,14 +33,6 @@ public class ArtesianBlend {
         this.vqVGratio = vqvg;
         this.vqPGratio = vqpg;
         this.vqDescription = vqscript;
-    }
-
-    public Bitmap getVqBitmap() {
-        return vqBitmap;
-    }
-
-    public void setVqBitmap(Bitmap bitmap) {
-        this.vqBitmap = bitmap;
     }
 
     public String getVqNumber() {
