@@ -11,25 +11,19 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.thevapequeen.vapequeenkiosk.MainActivity;
 import com.thevapequeen.vapequeenkiosk.R;
-import com.thevapequeen.vapequeenkiosk.housejuices.ArtesianBlend;
-
-import java.util.List;
 
 /*
  * Here you can control what to do next when the user selects an item
  */
-public class OnItemClickListenerArtesianNavItem implements OnItemClickListener {
+public class OnNavItemClickListener implements OnItemClickListener {
 
     public static String _mCategory;
-    List<ArtesianBlend> artesianBlendList;
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        MainActivity.artesianBlendsPerCategory.clear();
+
         _mCategory = null;
-        artesianBlendList = MainActivity.artesianBlendList;
         Context context = view.getContext();
 
         TextView textViewItem = ((TextView) view.findViewById(R.id.textViewNavItem));

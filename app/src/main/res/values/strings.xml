@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Vape Queen</string>
+    <string name="app_name">Vape Queen Kiosk</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="vgpgsplitview">-</string>
@@ -21,8 +21,5 @@
     <string name="text_large">Large Text</string>
     <string name="text_medium">Medium Text</string>
     <string name="text_small">Small Text</string>
-
-<!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

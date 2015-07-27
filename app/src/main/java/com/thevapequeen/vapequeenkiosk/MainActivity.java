@@ -123,7 +123,7 @@ public class MainActivity extends FragmentActivity
     }
 
     private void setupArtesianJuiceList(){
-        artesianBlendList = new ArrayList<ArtesianBlend>();
+        artesianBlendList = new ArrayList<>();
         String csvFile = houseJuiceFile;
         BufferedReader br = null;
         String line = "";

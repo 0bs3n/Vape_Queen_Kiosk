@@ -89,12 +89,12 @@ public class NavigationDrawerFragment extends Fragment {
         setupArtesianCategoryList();
         mDrawerArtesianListView = (ListView) v.findViewById(R.id.listviewArtesianCategories);
         mDrawerArtesianListView.setAdapter(new JuiceNavAdapter(artesianNavJuice, inflater));
-        mDrawerArtesianListView.setOnItemClickListener(new OnItemClickListenerArtesianNavItem());
+        mDrawerArtesianListView.setOnItemClickListener(new OnNavItemClickListener());
 
         setupPremiumBrandList();
         mDrawerPremiumListView = (ListView) v.findViewById(R.id.listviewPremiumBrands);
         mDrawerPremiumListView.setAdapter(new JuiceNavAdapter(premiumNavJuice, inflater));
-        mDrawerPremiumListView.setOnItemClickListener(new OnItemClickListenerPremiumNavItem());
+        mDrawerPremiumListView.setOnItemClickListener(new OnNavItemClickListener());
 
         return v;
     }
