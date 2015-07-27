@@ -10,55 +10,27 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
 
-import com.thevapequeen.vapequeenkiosk.housejuices.ArtesianBlend;
-import com.thevapequeen.vapequeenkiosk.housejuices.ArtesianBlendAdapter;
 import com.thevapequeen.vapequeenkiosk.navigation.JuiceViewFragment;
 import com.thevapequeen.vapequeenkiosk.navigation.NavigationDrawerFragment;
 import com.thevapequeen.vapequeenkiosk.navigation.OnNavItemClickListener;
-import com.thevapequeen.vapequeenkiosk.premiumjuices.PremiumJuice;
-import com.thevapequeen.vapequeenkiosk.premiumjuices.PremiumJuiceAdapter;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 /**
  * Created by James Campbell for exclusive use by The Vape Queen. All rights reserved.
  */
-public class MainActivity extends FragmentActivity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks,JuiceViewFragment.OnFragmentInteractionListener {
+public class MainActivity extends FragmentActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks,JuiceViewFragment.OnFragmentInteractionListener {
 
     private final List blockedKeys = new ArrayList(Arrays.asList(KeyEvent.KEYCODE_VOLUME_DOWN, KeyEvent.KEYCODE_VOLUME_UP, KeyEvent.KEYCODE_HOME));
-
-
     private NavigationDrawerFragment mNavigationDrawerFragment;
     public static JuiceViewFragment mJuiceViewFragment;
-
-    public static ArtesianBlendAdapter artesianBlendAdapter;
-    public static PremiumJuiceAdapter premiumJuiceAdapter;
-
-    public static String houseJuiceFile = null;
-    public static String premiumJuiceFile = null;
-
-    public static List<ArtesianBlend> artesianBlendList;
-    public static List<ArtesianBlend> artesianBlendsPerCategory = new ArrayList<>();
-    public static List<PremiumJuice> premiumJuiceList;
-    public static List<PremiumJuice> premiumJuicesPerBrand = new ArrayList<>();
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setupKioskState();
         setContentView(R.layout.activity_main);
-
-        houseJuiceFile = getString(R.string.artesian_juice_file);
-        premiumJuiceFile = getString(R.string.premium_juice_file);
-        setupArtesianJuiceList();
-        setupPremiumJuiceList();
 
         mJuiceViewFragment = (JuiceViewFragment)getSupportFragmentManager().findFragmentById(R.id.main_screen);
 
@@ -69,7 +41,6 @@ public class MainActivity extends FragmentActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
-
     }
 
     @Override
@@ -126,61 +97,6 @@ public class MainActivity extends FragmentActivity
         Settings.System.putInt(getContentResolver(),
                 Settings.System.SCREEN_BRIGHTNESS_MODE, Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL);
         Settings.System.putInt(getContentResolver(), Settings.System.SCREEN_BRIGHTNESS, 255);
-    }
-
-    private void setupArtesianJuiceList(){
-        artesianBlendList = new ArrayList<>();
-        String csvFile = houseJuiceFile;
-        BufferedReader br = null;
-        String line = "";
-        String cvsSplitBy = ",";
-        try {
-            br = new BufferedReader(new FileReader(csvFile));
-            while ((line = br.readLine()) != null) {
-                // use comma as separator
-                String[] _artesianjuice = line.split(cvsSplitBy);
-                artesianBlendList.add(new ArtesianBlend(_artesianjuice[0],_artesianjuice[1],_artesianjuice[2],_artesianjuice[3],_artesianjuice[4],_artesianjuice[5]));
-            }
-        }  catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (br != null) {
-                try {
-                    br.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
-
-    private void setupPremiumJuiceList(){
-        premiumJuiceList = new ArrayList<>();
-        String csvFile = premiumJuiceFile;
-        BufferedReader br = null;
-        String line = "";
-        String cvsSplitBy = ",";
-        try {
-            br = new BufferedReader(new FileReader(csvFile));
-            while ((line = br.readLine()) != null) {
-                String[] _premiumjuice = line.split(cvsSplitBy);
-                premiumJuiceList.add(new PremiumJuice(_premiumjuice[0],_premiumjuice[1],_premiumjuice[2],_premiumjuice[3],_premiumjuice[4],_premiumjuice[5]));
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (br != null) {
-                try {
-                    br.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
-
-    public void refreshJuiceViewFragment(){
-
     }
 
 

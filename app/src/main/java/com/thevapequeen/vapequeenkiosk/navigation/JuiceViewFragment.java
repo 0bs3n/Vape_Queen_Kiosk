@@ -15,6 +15,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.thevapequeen.vapequeenkiosk.R;
+import com.thevapequeen.vapequeenkiosk.housejuices.ArtesianBlend;
+import com.thevapequeen.vapequeenkiosk.housejuices.ArtesianBlendAdapter;
+import com.thevapequeen.vapequeenkiosk.premiumjuices.PremiumJuice;
+import com.thevapequeen.vapequeenkiosk.premiumjuices.PremiumJuiceAdapter;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -38,6 +48,17 @@ public class JuiceViewFragment extends Fragment {
     public static Integer ticklecounter = 0;
 
     private OnFragmentInteractionListener mListener;
+
+    public static ArtesianBlendAdapter artesianBlendAdapter;
+    public static PremiumJuiceAdapter premiumJuiceAdapter;
+
+    public static String houseJuiceFile = null;
+    public static String premiumJuiceFile = null;
+
+    public static List<ArtesianBlend> artesianBlendList;
+    public static List<ArtesianBlend> artesianBlendsPerCategory = new ArrayList<>();
+    public static List<PremiumJuice> premiumJuiceList;
+    public static List<PremiumJuice> premiumJuicesPerBrand = new ArrayList<>();
 
     /**
      * Use this factory method to create a new instance of
@@ -64,6 +85,11 @@ public class JuiceViewFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
+
+            houseJuiceFile = getString(R.string.artesian_juice_file);
+            premiumJuiceFile = getString(R.string.premium_juice_file);
+            setupArtesianJuiceList();
+            setupPremiumJuiceList();
 
         }
 
@@ -170,6 +196,57 @@ public class JuiceViewFragment extends Fragment {
         });
         // Showing Alert Message
         alertDialog.show();
+    }
+
+    private void setupArtesianJuiceList(){
+        artesianBlendList = new ArrayList<>();
+        String csvFile = houseJuiceFile;
+        BufferedReader br = null;
+        String line = "";
+        String cvsSplitBy = ",";
+        try {
+            br = new BufferedReader(new FileReader(csvFile));
+            while ((line = br.readLine()) != null) {
+                // use comma as separator
+                String[] _artesianjuice = line.split(cvsSplitBy);
+                artesianBlendList.add(new ArtesianBlend(_artesianjuice[0],_artesianjuice[1],_artesianjuice[2],_artesianjuice[3],_artesianjuice[4],_artesianjuice[5]));
+            }
+        }  catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (br != null) {
+                try {
+                    br.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    private void setupPremiumJuiceList(){
+        premiumJuiceList = new ArrayList<>();
+        String csvFile = premiumJuiceFile;
+        BufferedReader br = null;
+        String line = "";
+        String cvsSplitBy = ",";
+        try {
+            br = new BufferedReader(new FileReader(csvFile));
+            while ((line = br.readLine()) != null) {
+                String[] _premiumjuice = line.split(cvsSplitBy);
+                premiumJuiceList.add(new PremiumJuice(_premiumjuice[0],_premiumjuice[1],_premiumjuice[2],_premiumjuice[3],_premiumjuice[4],_premiumjuice[5]));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (br != null) {
+                try {
+                    br.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
 }
