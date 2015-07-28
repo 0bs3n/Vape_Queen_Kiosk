@@ -56,9 +56,7 @@ public class JuiceViewFragment extends Fragment {
     public static String premiumJuiceFile = null;
 
     public static List<ArtesianBlend> artesianBlendList;
-    public static List<ArtesianBlend> artesianBlendsPerCategory = new ArrayList<>();
     public static List<PremiumJuice> premiumJuiceList;
-    public static List<PremiumJuice> premiumJuicesPerBrand = new ArrayList<>();
 
     /**
      * Use this factory method to create a new instance of
@@ -90,9 +88,7 @@ public class JuiceViewFragment extends Fragment {
             premiumJuiceFile = getString(R.string.premium_juice_file);
             setupArtesianJuiceList();
             setupPremiumJuiceList();
-
         }
-
     }
 
     @Override
