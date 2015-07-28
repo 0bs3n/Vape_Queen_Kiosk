@@ -6,12 +6,11 @@ package com.thevapequeen.vapequeenkiosk.premiumjuices;
 public class PremiumJuice {
 
     String pjImageFilePath;
-    String pjManufacturer;
     String pjName;
     String pjVGratio;
     String pjPGratio;
     String pjDescription;
-
+    String pjManufacturer;
 
     public PremiumJuice() {
         //Empty Constructor for safety.
@@ -20,20 +19,12 @@ public class PremiumJuice {
     public PremiumJuice(String pjimagefilepath,  String pjname, String pjvg, String pjpg,
                         String pjscript,String pjmanufacturer) {
         this.pjImageFilePath = pjimagefilepath;
-        this.pjManufacturer = pjmanufacturer;
         this.pjName = pjname;
         this.pjVGratio = pjvg;
         this.pjPGratio = pjpg;
         this.pjDescription = pjscript;
+        this.pjManufacturer = pjmanufacturer;
 
-    }
-
-    public String getPjManufacturer(){
-        return pjManufacturer;
-    }
-
-    public void setPjManufacturer(String manufacturer){
-        this.pjManufacturer = manufacturer;
     }
 
     public String getPjImageFilePath() {
@@ -74,6 +65,14 @@ public class PremiumJuice {
 
     public void setPjDescription(String description) {
         this.pjDescription = description;
+    }
+
+    public String getPjManufacturer(){
+        return pjManufacturer;
+    }
+
+    public void setPjManufacturer(String manufacturer){
+        this.pjManufacturer = manufacturer;
     }
 
 
