@@ -81,7 +81,7 @@ public class MainActivity extends FragmentActivity implements NavigationDrawerFr
     //This callback to JuiceView must remain empty for custom layout
     }
 
-    public static void changeJuiceFragText(){
+    public static void changeJuiceFrag(){
         mJuiceViewFragment.changeText(OnNavItemClickListener._mCategory);
     }
 
