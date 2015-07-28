@@ -2,6 +2,7 @@ package com.thevapequeen.vapequeenkiosk.navigation;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
@@ -181,7 +182,7 @@ public class NavigationDrawerFragment extends Fragment {
             while ((line = br.readLine()) != null) {
                 // use comma as separator
                 String[] _artesianjuice = line.split(cvsSplitBy);
-                artesianNavJuice.add(new JuiceNavItem(_artesianjuice[0]));
+                artesianNavJuice.add(new JuiceNavItem(BitmapFactory.decodeResource(getResources(),R.drawable.logo_thumbnail),_artesianjuice[0]));
             }
 
         } catch (FileNotFoundException e) {
@@ -209,7 +210,7 @@ public class NavigationDrawerFragment extends Fragment {
             br = new BufferedReader(new FileReader(csvFile));
             while ((line = br.readLine()) != null) {
                 String[] _premiumjuice = line.split(cvsSplitBy);
-                premiumNavJuice.add(new JuiceNavItem(_premiumjuice[0]));
+                premiumNavJuice.add(new JuiceNavItem(BitmapFactory.decodeResource(getResources(),R.drawable.premium_thumbnail),_premiumjuice[0]));
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();

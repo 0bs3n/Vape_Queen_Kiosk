@@ -66,7 +66,7 @@ public class JuiceNavAdapter extends BaseAdapter {
         }
         JuiceNavItem currentJuice = juiceNavItems.get(position);
         // Add received info to UI
-        //itemAdapter.jImage.setImageBitmap(Bitmap);
+        itemAdapter.jImage.setImageBitmap(currentJuice.getBitmap());
         itemAdapter.jName.setText(currentJuice.getName());
 
         return convertView;
@@ -80,7 +80,6 @@ public class JuiceNavAdapter extends BaseAdapter {
     private class ViewItem {
         ImageView jImage;
         TextView jName;
-
     }
 
 
