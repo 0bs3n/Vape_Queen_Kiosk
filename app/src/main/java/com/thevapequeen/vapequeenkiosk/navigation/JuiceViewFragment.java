@@ -2,6 +2,7 @@ package com.thevapequeen.vapequeenkiosk.navigation;
 
 import android.app.Activity;
 import android.content.DialogInterface;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -133,6 +134,10 @@ public class JuiceViewFragment extends Fragment {
 
     public void changeText(String string){
         textViewMain.setText(string);
+    }
+
+    public void changeImage(Bitmap bitmap) {
+        imageViewMain.setImageBitmap(bitmap);
     }
 
     private void showExitPopup(View v){

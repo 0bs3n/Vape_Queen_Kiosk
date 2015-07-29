@@ -12,7 +12,7 @@ import android.view.WindowManager;
 
 import com.thevapequeen.vapequeenkiosk.navigation.JuiceViewFragment;
 import com.thevapequeen.vapequeenkiosk.navigation.NavigationDrawerFragment;
-import com.thevapequeen.vapequeenkiosk.navigation.OnNavItemClickListener;
+import com.thevapequeen.vapequeenkiosk.navigation.OnArtesianNavItemClickListener;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -81,8 +81,9 @@ public class MainActivity extends FragmentActivity implements NavigationDrawerFr
     //This callback to JuiceView must remain empty for custom layout
     }
 
-    public static void changeJuiceFrag(){
-        mJuiceViewFragment.changeText(OnNavItemClickListener._mCategory);
+    public static void changeArtesianJuiceFrag(){
+        mJuiceViewFragment.changeImage(OnArtesianNavItemClickListener._mBitmap);
+        mJuiceViewFragment.changeText(OnArtesianNavItemClickListener._mCategory);
     }
 
     private void setupKioskState() {

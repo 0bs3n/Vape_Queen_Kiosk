@@ -5,13 +5,13 @@ package com.thevapequeen.vapequeenkiosk.navigation;
  */
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.thevapequeen.vapequeenkiosk.MainActivity;
 import com.thevapequeen.vapequeenkiosk.R;
 import com.thevapequeen.vapequeenkiosk.housejuices.ArtesianBlend;
 import com.thevapequeen.vapequeenkiosk.housejuices.ArtesianBlendAdapter;
@@ -27,7 +27,7 @@ import java.util.List;
 /*
  * Here you can control what to do next when the user selects an item
  */
-public class OnNavItemClickListener implements OnItemClickListener {
+public class OnPremiumNavItemClickListener implements OnItemClickListener {
 
     public static String _mCategory;
     public static ArtesianBlendAdapter artesianBlendAdapter;
@@ -42,6 +42,7 @@ public class OnNavItemClickListener implements OnItemClickListener {
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+        Log.i("********", parent.getAdapter().toString());
         _mCategory = null;
         Context context = view.getContext();
 
@@ -50,7 +51,7 @@ public class OnNavItemClickListener implements OnItemClickListener {
         // get the clicked item name
         String listItemText = textViewItem.getText().toString();
         _mCategory = listItemText;
-        MainActivity.changeJuiceFrag();
+        //MainActivity.changeJuiceFrag();
         // just toast it
         Toast.makeText(context,_mCategory, Toast.LENGTH_LONG).show();
         NavigationDrawerFragment.mDrawerLayout.closeDrawer(NavigationDrawerFragment.mFragmentContainerView);
