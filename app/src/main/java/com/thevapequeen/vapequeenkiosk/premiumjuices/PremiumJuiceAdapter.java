@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.thevapequeen.vapequeenkiosk.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /*
@@ -17,12 +18,16 @@ import java.util.List;
  */
 public class PremiumJuiceAdapter extends BaseAdapter {
 
-    private List<PremiumJuice> premiumElements;
+    private List<PremiumJuice> premiumElements = new ArrayList<>();
     private LayoutInflater vi;
 
     public PremiumJuiceAdapter(List<PremiumJuice> premiumElements, LayoutInflater inflater) {
         this.premiumElements = premiumElements;
         vi = inflater;
+    }
+
+    public PremiumJuiceAdapter(){
+
     }
 
     /**
@@ -57,12 +62,12 @@ public class PremiumJuiceAdapter extends BaseAdapter {
         final ViewItem itemAdapter;
 
         if (convertView == null) {
-            convertView = vi.inflate(R.layout.item_artesian_blend, null);
+            convertView = vi.inflate(R.layout.item_premium_juice, null);
             itemAdapter = new ViewItem();
             itemAdapter.jName = (TextView) convertView.findViewById(R.id.textViewPremiumName);
             itemAdapter.jDescription = (TextView) convertView.findViewById(R.id.textViewPremiumDescription);
             itemAdapter.jVG = (TextView) convertView.findViewById(R.id.textViewPremiumVG);
-            itemAdapter.jPG = (TextView) convertView.findViewById(R.id.textViewHousePG);
+            itemAdapter.jPG = (TextView) convertView.findViewById(R.id.textViewPremiumPG);
             convertView.setTag(itemAdapter);
         } else {
             itemAdapter = (ViewItem) convertView.getTag();

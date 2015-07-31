@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.thevapequeen.vapequeenkiosk.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /*
@@ -19,12 +20,15 @@ import java.util.List;
  */
 public class ArtesianBlendAdapter extends BaseAdapter {
 
-    private List<ArtesianBlend> artesianElements;
+    private List<ArtesianBlend> artesianElements = new ArrayList<>();
     private LayoutInflater vi;
 
     public ArtesianBlendAdapter(List<ArtesianBlend> artesianElements, LayoutInflater inflater) {
         this.artesianElements = artesianElements;
         vi = inflater;
+    }
+    public ArtesianBlendAdapter(){
+        //Empty Constructor
     }
 
     /**
