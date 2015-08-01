@@ -41,7 +41,6 @@ public class MainActivity extends FragmentActivity implements NavigationDrawerFr
 
     Timer timer;
     TimerTask timerTask;
-    //we are going to use a handler to be able to run in our TimerTask
     final Handler handler = new Handler();
 
     @Override
@@ -137,18 +136,10 @@ public class MainActivity extends FragmentActivity implements NavigationDrawerFr
         initializeTimerTask();
 
         //schedule the timer, after the first 5000ms the TimerTask will run every 10000ms
-        timer.schedule(timerTask, 5000, 10000); //
+        timer.schedule(timerTask, 5000, 5500); //
     }
 
-    public void stoptimertask(View v) {
-        //stop the timer, if it's not already null
-        if (timer != null) {
-            timer.cancel();
-            timer = null;
-        }
-    }
-
-    public void initializeTimerTask() {
+    private void initializeTimerTask() {
 
         timerTask = new TimerTask() {
             public void run() {
