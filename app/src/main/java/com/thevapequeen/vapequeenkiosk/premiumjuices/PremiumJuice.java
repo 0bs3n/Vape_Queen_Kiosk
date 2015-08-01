@@ -12,10 +12,6 @@ public class PremiumJuice {
     String pjDescription;
     String pjManufacturer;
 
-    public PremiumJuice() {
-        //Empty Constructor for safety.
-    }
-
     public PremiumJuice(String pjimagefilepath,  String pjname, String pjvg, String pjpg,
                         String pjscript,String pjmanufacturer) {
         this.pjImageFilePath = pjimagefilepath;

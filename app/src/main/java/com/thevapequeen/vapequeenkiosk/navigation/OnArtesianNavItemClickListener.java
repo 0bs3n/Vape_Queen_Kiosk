@@ -94,7 +94,6 @@ public class OnArtesianNavItemClickListener implements OnItemClickListener {
         _mBitmap = null;
         _mBitmap = BitmapFactory.decodeFile("/sdcard/Download/logo.png");
         MainActivity.imageView.setImageBitmap(_mBitmap);
-
     }
 
 

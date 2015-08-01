@@ -12,10 +12,6 @@ public class ArtesianBlend {
     String vqDescription;
     String vqCategory;
 
-    public ArtesianBlend() {
-        //Empty Constructor for safety.
-    }
-
     public ArtesianBlend(String vqnumber, String vqname, String vqvg, String vqpg,
                          String vqscript, String vqcategory) {
         this.vqNumber = vqnumber;
@@ -24,15 +20,6 @@ public class ArtesianBlend {
         this.vqPGratio = vqpg;
         this.vqDescription = vqscript;
         this.vqCategory = vqcategory;
-    }
-
-    public ArtesianBlend(String vqnumber, String vqname, String vqvg, String vqpg,
-                         String vqscript) {
-        this.vqNumber = vqnumber;
-        this.vqName = vqname;
-        this.vqVGratio = vqvg;
-        this.vqPGratio = vqpg;
-        this.vqDescription = vqscript;
     }
 
     public String getVqNumber() {

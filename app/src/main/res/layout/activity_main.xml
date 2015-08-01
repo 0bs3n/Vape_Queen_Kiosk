@@ -41,13 +41,15 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/listViewMainArtesian"
                 android:layout_below="@+id/textViewMain"
-                android:layout_centerHorizontal="true" />
+                android:layout_centerHorizontal="true"
+                android:visibility="invisible"/>
             <ListView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/listViewMainPremium"
                 android:layout_below="@+id/textViewMain"
-                android:layout_centerHorizontal="true" />
+                android:layout_centerHorizontal="true"
+                android:visibility="invisible"/>
 
         </RelativeLayout>
     </FrameLayout>

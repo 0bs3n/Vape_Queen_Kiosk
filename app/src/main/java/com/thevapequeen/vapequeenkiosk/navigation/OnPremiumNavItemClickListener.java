@@ -41,7 +41,7 @@ public class OnPremiumNavItemClickListener implements OnItemClickListener {
         MainActivity.textView.setText(_Brand);
 
         //Setup List Change
-        setupPremiumBrandList(_Brand, view);
+        setupPremiumBrandList(_Brand);
 
         //Setup Image Change
         setupPremiumImageView();
@@ -61,7 +61,7 @@ public class OnPremiumNavItemClickListener implements OnItemClickListener {
         MainActivity.textView.setText(_Brand);
     }
 
-    public void setupPremiumBrandList(String brand, View v){
+    public void setupPremiumBrandList(String brand){
         premiumJuiceList.clear();
         String csvFile = "/sdcard/Download/premium_juices.csv";
         BufferedReader br = null;
