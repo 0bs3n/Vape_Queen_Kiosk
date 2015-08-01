@@ -9,9 +9,12 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
+import com.thevapequeen.vapequeenkiosk.housejuices.ArtesianBlendAdapter;
 import com.thevapequeen.vapequeenkiosk.navigation.NavigationDrawerFragment;
+import com.thevapequeen.vapequeenkiosk.premiumjuices.PremiumJuiceAdapter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -26,6 +29,11 @@ public class MainActivity extends FragmentActivity implements NavigationDrawerFr
 
     public static ImageView imageView;
     public static TextView textView;
+    public static ListView ArtesianListView;
+    public static ListView PremiumListView;
+
+    public static ArtesianBlendAdapter artesianBlendAdapter = new ArtesianBlendAdapter();
+    public static PremiumJuiceAdapter premiumJuiceAdapter = new PremiumJuiceAdapter();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +43,8 @@ public class MainActivity extends FragmentActivity implements NavigationDrawerFr
 
         imageView = (ImageView)findViewById(R.id.imageViewMain);
         textView = (TextView)findViewById(R.id.textViewMain);
+        ArtesianListView = (ListView)findViewById(R.id.listViewMainArtesian);
+        PremiumListView = (ListView)findViewById(R.id.listViewMainPremium);
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
@@ -91,8 +101,5 @@ public class MainActivity extends FragmentActivity implements NavigationDrawerFr
                 Settings.System.SCREEN_BRIGHTNESS_MODE, Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL);
         Settings.System.putInt(getContentResolver(), Settings.System.SCREEN_BRIGHTNESS, 255);
     }
-
-
-
 
 }
