@@ -17,7 +17,11 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.thevapequeen.vapequeenkiosk.housejuices.ArtesianBlendAdapter;
 import com.thevapequeen.vapequeenkiosk.navigation.NavigationDrawerFragment;
+import com.thevapequeen.vapequeenkiosk.navigation.OnArtesianNavItemClickListener;
+import com.thevapequeen.vapequeenkiosk.navigation.OnPremiumNavItemClickListener;
+import com.thevapequeen.vapequeenkiosk.premiumjuices.PremiumJuiceAdapter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -56,9 +60,13 @@ public class MainActivity extends FragmentActivity implements NavigationDrawerFr
 
         textView = (TextView)findViewById(R.id.textViewMain);
 
+        ArtesianBlendAdapter artesianadapter = new ArtesianBlendAdapter(MainActivity.this, OnArtesianNavItemClickListener.artesianBlendList);
         ArtesianListView = (ListView)findViewById(R.id.listViewMainArtesian);
+        ArtesianListView.setAdapter(artesianadapter);
 
-        PremiumListView = (ListView)findViewById(R.id.listViewMainPremium);;
+        PremiumJuiceAdapter premiumadapter = new PremiumJuiceAdapter(MainActivity.this, OnPremiumNavItemClickListener.premiumJuiceList);
+        PremiumListView = (ListView)findViewById(R.id.listViewMainPremium);
+        PremiumListView.setAdapter(premiumadapter);
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);

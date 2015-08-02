@@ -40,7 +40,7 @@ public class OnArtesianNavItemClickListener implements OnItemClickListener {
         setupTextView(view);        
 
         //Setup Artesian List
-        setupPremiumBrandList(_mCategory);
+        setupPremiumBrandList(_mCategory, view);
         
         //Setup ImageView
         setupImageView(view);
@@ -60,7 +60,7 @@ public class OnArtesianNavItemClickListener implements OnItemClickListener {
         MainActivity.textView.setText(_mCategory);
     }
 
-    public void setupPremiumBrandList(String brand){
+    public void setupPremiumBrandList(String brand, View view){
         artesianBlendList.clear();
         String csvFile = "/sdcard/Download/artesian_juices.csv";
         BufferedReader br = null;
