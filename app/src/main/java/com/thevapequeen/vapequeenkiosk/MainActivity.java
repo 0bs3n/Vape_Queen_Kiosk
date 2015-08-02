@@ -1,5 +1,6 @@
 package com.thevapequeen.vapequeenkiosk;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -41,7 +42,10 @@ public class MainActivity extends FragmentActivity implements NavigationDrawerFr
     public static TextView textView;
     public static ListView ArtesianListView;
     public static ListView PremiumListView;
-    public static Bitmap _mBitmap;
+    public static Bitmap mBitmap;
+    public static ArtesianBlendAdapter artesianadapter;
+    public static PremiumJuiceAdapter premiumadapter;
+    public static Activity mcontext;
 
     Timer timer;
     TimerTask timerTask;
@@ -52,21 +56,13 @@ public class MainActivity extends FragmentActivity implements NavigationDrawerFr
         super.onCreate(savedInstanceState);
         setupKioskState();
         setContentView(R.layout.activity_main);
-
+        mcontext = this;
         imageView = (ImageView)findViewById(R.id.imageViewMain);
-        _mBitmap = BitmapFactory.decodeFile("/sdcard/Download/logo.png");
-        imageView.setImageBitmap(_mBitmap);
+        mBitmap = BitmapFactory.decodeFile("/sdcard/Download/logo.png");
+        imageView.setImageBitmap(mBitmap);
         startTimer();
 
         textView = (TextView)findViewById(R.id.textViewMain);
-
-        ArtesianBlendAdapter artesianadapter = new ArtesianBlendAdapter(MainActivity.this, OnArtesianNavItemClickListener.artesianBlendList);
-        ArtesianListView = (ListView)findViewById(R.id.listViewMainArtesian);
-        ArtesianListView.setAdapter(artesianadapter);
-
-        PremiumJuiceAdapter premiumadapter = new PremiumJuiceAdapter(MainActivity.this, OnPremiumNavItemClickListener.premiumJuiceList);
-        PremiumListView = (ListView)findViewById(R.id.listViewMainPremium);
-        PremiumListView.setAdapter(premiumadapter);
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
@@ -75,6 +71,15 @@ public class MainActivity extends FragmentActivity implements NavigationDrawerFr
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+
+        ArtesianListView = (ListView)findViewById(R.id.listViewMainArtesian);
+        artesianadapter = new ArtesianBlendAdapter(MainActivity.this,OnArtesianNavItemClickListener._artesianBlendList);
+        ArtesianListView.setAdapter(artesianadapter);
+
+        PremiumListView = (ListView)findViewById(R.id.listViewMainPremium);
+        premiumadapter = new PremiumJuiceAdapter(MainActivity.this, OnPremiumNavItemClickListener.premiumJuiceList);
+        PremiumListView.setAdapter(premiumadapter);
+
     }
 
     @Override
@@ -115,6 +120,7 @@ public class MainActivity extends FragmentActivity implements NavigationDrawerFr
     @Override
     public void onNavigationDrawerItemSelected(int position) {
     //This callback to Nav must remain empty for custom layout
+
     }
 
     private void setupKioskState() {
@@ -155,7 +161,7 @@ public class MainActivity extends FragmentActivity implements NavigationDrawerFr
                 //use a handler to run a toast that shows the current timestamp
                 handler.post(new Runnable() {
                     public void run() {
-                        animationImageFadeOut(_mBitmap);
+                        animationImageFadeOut(mBitmap);
                     }
                 });
             }

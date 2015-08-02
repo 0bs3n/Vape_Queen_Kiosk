@@ -30,7 +30,7 @@ public class OnArtesianNavItemClickListener implements OnItemClickListener {
 
     public static String _mCategory;
     public static Bitmap _mBitmap;
-    public static List<ArtesianBlend> artesianBlendList = new ArrayList<>();
+    public static List<ArtesianBlend> _artesianBlendList = new ArrayList<>();
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -61,7 +61,7 @@ public class OnArtesianNavItemClickListener implements OnItemClickListener {
     }
 
     public void setupPremiumBrandList(String brand, View view){
-        artesianBlendList.clear();
+        _artesianBlendList.clear();
         String csvFile = "/sdcard/Download/artesian_juices.csv";
         BufferedReader br = null;
         String line = "";
@@ -71,7 +71,7 @@ public class OnArtesianNavItemClickListener implements OnItemClickListener {
             while ((line = br.readLine()) != null) {
                 String[] _artesianblend = line.split(cvsSplitBy);
                 if(_artesianblend[5].equals(brand)){
-                    artesianBlendList.add(new ArtesianBlend(_artesianblend[0],_artesianblend[1],_artesianblend[2],_artesianblend[3],_artesianblend[4],_artesianblend[5]));
+                    _artesianBlendList.add(new ArtesianBlend(_artesianblend[0], _artesianblend[1], _artesianblend[2], _artesianblend[3], _artesianblend[4], _artesianblend[5]));
                 }
             }
 
@@ -95,7 +95,5 @@ public class OnArtesianNavItemClickListener implements OnItemClickListener {
         _mBitmap = BitmapFactory.decodeFile("/sdcard/Download/logo.png");
         MainActivity.imageView.setImageBitmap(_mBitmap);
     }
-
-
 
 }
