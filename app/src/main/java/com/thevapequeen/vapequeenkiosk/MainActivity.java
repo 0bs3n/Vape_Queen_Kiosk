@@ -17,12 +17,11 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.thevapequeen.vapequeenkiosk.housejuices.ArtesianBlendAdapter;
 import com.thevapequeen.vapequeenkiosk.navigation.NavigationDrawerFragment;
 import com.thevapequeen.vapequeenkiosk.navigation.OnArtesianNavItemClickListener;
 import com.thevapequeen.vapequeenkiosk.navigation.OnPremiumNavItemClickListener;
-import com.thevapequeen.vapequeenkiosk.premiumjuices.PremiumJuiceAdapter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -38,18 +37,17 @@ public class MainActivity extends FragmentActivity implements NavigationDrawerFr
     private final List blockedKeys = new ArrayList(Arrays.asList(KeyEvent.KEYCODE_VOLUME_DOWN, KeyEvent.KEYCODE_VOLUME_UP, KeyEvent.KEYCODE_HOME));
     private NavigationDrawerFragment mNavigationDrawerFragment;
 
+
     public static ImageView imageView;
     public static TextView textView;
-    public static ListView ArtesianListView;
-    public static ListView PremiumListView;
     public static Bitmap mBitmap;
-    public static ArtesianBlendAdapter artesianadapter;
-    public static PremiumJuiceAdapter premiumadapter;
     public static Activity mcontext;
 
     Timer timer;
     TimerTask timerTask;
     final Handler handler = new Handler();
+
+    public static ListView listViewItems;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +56,7 @@ public class MainActivity extends FragmentActivity implements NavigationDrawerFr
         setContentView(R.layout.activity_main);
         mcontext = this;
         imageView = (ImageView)findViewById(R.id.imageViewMain);
+
         mBitmap = BitmapFactory.decodeFile("/sdcard/Download/logo.png");
         imageView.setImageBitmap(mBitmap);
         startTimer();
@@ -71,14 +70,6 @@ public class MainActivity extends FragmentActivity implements NavigationDrawerFr
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
-
-        ArtesianListView = (ListView)findViewById(R.id.listViewMainArtesian);
-        artesianadapter = new ArtesianBlendAdapter(MainActivity.this,OnArtesianNavItemClickListener._artesianBlendList);
-        ArtesianListView.setAdapter(artesianadapter);
-
-        PremiumListView = (ListView)findViewById(R.id.listViewMainPremium);
-        premiumadapter = new PremiumJuiceAdapter(MainActivity.this, OnPremiumNavItemClickListener.premiumJuiceList);
-        PremiumListView.setAdapter(premiumadapter);
 
     }
 
@@ -167,6 +158,16 @@ public class MainActivity extends FragmentActivity implements NavigationDrawerFr
             }
         };
 
+    }
+
+    public void refreshArtesianListView(){
+        // toast the category
+        Toast.makeText(this,OnArtesianNavItemClickListener._mCategory, Toast.LENGTH_LONG).show();
+    }
+
+    public void refreshPremiumListView(){
+        // toast the category
+        Toast.makeText(this,OnPremiumNavItemClickListener._Brand, Toast.LENGTH_LONG).show();
     }
 
 }

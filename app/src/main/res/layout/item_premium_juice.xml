@@ -6,7 +6,6 @@
     android:layout_centerVertical="true"
     android:orientation="vertical">
 
-
     <TextView
         android:id="@+id/textViewPremiumName"
         android:layout_width="fill_parent"

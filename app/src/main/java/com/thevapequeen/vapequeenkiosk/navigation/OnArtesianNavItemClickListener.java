@@ -10,11 +10,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.thevapequeen.vapequeenkiosk.MainActivity;
 import com.thevapequeen.vapequeenkiosk.R;
-import com.thevapequeen.vapequeenkiosk.housejuices.ArtesianBlend;
+import com.thevapequeen.vapequeenkiosk.artesianblends.ArtesianBlend;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -40,13 +39,12 @@ public class OnArtesianNavItemClickListener implements OnItemClickListener {
         setupTextView(view);        
 
         //Setup Artesian List
-        setupPremiumBrandList(_mCategory, view);
+        setupArtesianBrandList(_mCategory, view);
         
         //Setup ImageView
         setupImageView(view);
 
-        // toast the category
-        Toast.makeText(view.getContext(),_mCategory, Toast.LENGTH_LONG).show();
+
 
         //close the drawer
         NavigationDrawerFragment.mDrawerLayout.closeDrawer(NavigationDrawerFragment.mFragmentContainerView);
@@ -60,7 +58,7 @@ public class OnArtesianNavItemClickListener implements OnItemClickListener {
         MainActivity.textView.setText(_mCategory);
     }
 
-    public void setupPremiumBrandList(String brand, View view){
+    public void setupArtesianBrandList(String brand, View view){
         _artesianBlendList.clear();
         String csvFile = "/sdcard/Download/artesian_juices.csv";
         BufferedReader br = null;
@@ -74,7 +72,7 @@ public class OnArtesianNavItemClickListener implements OnItemClickListener {
                     _artesianBlendList.add(new ArtesianBlend(_artesianblend[0], _artesianblend[1], _artesianblend[2], _artesianblend[3], _artesianblend[4], _artesianblend[5]));
                 }
             }
-
+            ((MainActivity)view.getContext()).refreshArtesianListView();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {

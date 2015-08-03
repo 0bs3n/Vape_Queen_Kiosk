@@ -41,7 +41,7 @@ public class OnPremiumNavItemClickListener implements OnItemClickListener {
         MainActivity.textView.setText(_Brand);
 
         //Setup List Change
-        setupPremiumBrandList(_Brand);
+        setupPremiumBrandList(_Brand, view);
 
         //Setup Image Change
         setupPremiumImageView();
@@ -61,7 +61,7 @@ public class OnPremiumNavItemClickListener implements OnItemClickListener {
         MainActivity.textView.setText(_Brand);
     }
 
-    public void setupPremiumBrandList(String brand){
+    public void setupPremiumBrandList(String brand, View view){
         premiumJuiceList.clear();
         String csvFile = "/sdcard/Download/premium_juices.csv";
         BufferedReader br = null;
@@ -75,7 +75,7 @@ public class OnPremiumNavItemClickListener implements OnItemClickListener {
                     premiumJuiceList.add(new PremiumJuice(_premiumjuice[0],_premiumjuice[1],_premiumjuice[2],_premiumjuice[3],_premiumjuice[4],_premiumjuice[5]));
                 }
             }
-
+            ((MainActivity)view.getContext()).refreshPremiumListView();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {

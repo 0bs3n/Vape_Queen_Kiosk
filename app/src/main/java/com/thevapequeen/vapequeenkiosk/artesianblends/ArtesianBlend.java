@@ -1,4 +1,4 @@
-package com.thevapequeen.vapequeenkiosk.housejuices;
+package com.thevapequeen.vapequeenkiosk.artesianblends;
 
 /**
  * Created by James Campbell for exclusive use by The Vape Queen. All rights reserved.

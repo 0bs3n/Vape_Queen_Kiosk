@@ -22,4 +22,7 @@
     <string name="text_medium">Medium Text</string>
     <string name="text_small">Small Text</string>
 
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>
