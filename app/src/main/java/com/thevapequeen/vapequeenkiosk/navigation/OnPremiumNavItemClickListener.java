@@ -4,16 +4,13 @@ package com.thevapequeen.vapequeenkiosk.navigation;
  * Created by Human on 7/21/2015.
  */
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.thevapequeen.vapequeenkiosk.MainActivity;
-import com.thevapequeen.vapequeenkiosk.R;
+import com.thevapequeen.vapequeenkiosk.PremiumActivity;
 import com.thevapequeen.vapequeenkiosk.premiumjuices.PremiumJuice;
 
 import java.io.BufferedReader;
@@ -29,39 +26,21 @@ import java.util.List;
 public class OnPremiumNavItemClickListener implements OnItemClickListener {
 
     public static String _Brand;
-    public static Bitmap _mBitmap;
+    public static Context _mContext;
     public static List<PremiumJuice> premiumJuiceList = new ArrayList<>();
 
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-        //Setup Text Change
-        setupPremiumTextView(view);
-        MainActivity.textView.setText(_Brand);
-
+        _mContext = view.getContext();
         //Setup List Change
-        setupPremiumBrandList(_Brand, view);
-
-        //Setup Image Change
-        setupPremiumImageView();
-
-        // toast the category
-        Toast.makeText(view.getContext(), _Brand, Toast.LENGTH_LONG).show();
-
+        setupPremiumBrandList(_Brand);
         //close the drawer
         NavigationDrawerFragment.mDrawerLayout.closeDrawer(NavigationDrawerFragment.mFragmentContainerView);
     }
 
-    private void setupPremiumTextView(View view) {
-        _Brand = null;
-        TextView textViewItem = ((TextView) view.findViewById(R.id.textViewNavItem));
-        String listItemText = textViewItem.getText().toString();
-        _Brand = listItemText;
-        MainActivity.textView.setText(_Brand);
-    }
-
-    public void setupPremiumBrandList(String brand, View view){
+    public void setupPremiumBrandList(String brand){
         premiumJuiceList.clear();
         String csvFile = "/sdcard/Download/premium_juices.csv";
         BufferedReader br = null;
@@ -75,7 +54,8 @@ public class OnPremiumNavItemClickListener implements OnItemClickListener {
                     premiumJuiceList.add(new PremiumJuice(_premiumjuice[0],_premiumjuice[1],_premiumjuice[2],_premiumjuice[3],_premiumjuice[4],_premiumjuice[5]));
                 }
             }
-            ((MainActivity)view.getContext()).refreshPremiumListView();
+            Intent intent = new Intent(_mContext, PremiumActivity.class);
+            _mContext.startActivity(intent);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -90,13 +70,6 @@ public class OnPremiumNavItemClickListener implements OnItemClickListener {
             }
         }
     }
-
-    private void setupPremiumImageView(){
-        _mBitmap = null;
-        _mBitmap = BitmapFactory.decodeFile(premiumJuiceList.get(0).getPjImageFilePath());
-        MainActivity.imageView.setImageBitmap(_mBitmap);
-    }
-
 
 
 }

@@ -4,15 +4,14 @@ package com.thevapequeen.vapequeenkiosk.navigation;
  * Created by Human on 7/21/2015.
  */
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+
+import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.TextView;
 
-import com.thevapequeen.vapequeenkiosk.MainActivity;
-import com.thevapequeen.vapequeenkiosk.R;
+import com.thevapequeen.vapequeenkiosk.ArtesianActivity;
 import com.thevapequeen.vapequeenkiosk.artesianblends.ArtesianBlend;
 
 import java.io.BufferedReader;
@@ -26,39 +25,20 @@ import java.util.List;
  * Here you can control what to do next when the user selects an item
  */
 public class OnArtesianNavItemClickListener implements OnItemClickListener {
-
+    public static Context _mContext;
     public static String _mCategory;
-    public static Bitmap _mBitmap;
     public static List<ArtesianBlend> _artesianBlendList = new ArrayList<>();
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-
-        //Setup Text Change
-        setupTextView(view);        
-
-        //Setup Artesian List
-        setupArtesianBrandList(_mCategory, view);
-        
-        //Setup ImageView
-        setupImageView(view);
-
-
-
+        _mContext = view.getContext();
+        //Setup ArtesianActivity List
+        setupArtesianBrandList(_mCategory);
         //close the drawer
         NavigationDrawerFragment.mDrawerLayout.closeDrawer(NavigationDrawerFragment.mFragmentContainerView);
     }
 
-    private void setupTextView(View view) {
-        _mCategory = null;
-        TextView textViewItem = ((TextView) view.findViewById(R.id.textViewNavItem));
-        String listItemText = textViewItem.getText().toString();
-        _mCategory = listItemText;
-        MainActivity.textView.setText(_mCategory);
-    }
-
-    public void setupArtesianBrandList(String brand, View view){
+    public void setupArtesianBrandList(String brand){
         _artesianBlendList.clear();
         String csvFile = "/sdcard/Download/artesian_juices.csv";
         BufferedReader br = null;
@@ -72,7 +52,8 @@ public class OnArtesianNavItemClickListener implements OnItemClickListener {
                     _artesianBlendList.add(new ArtesianBlend(_artesianblend[0], _artesianblend[1], _artesianblend[2], _artesianblend[3], _artesianblend[4], _artesianblend[5]));
                 }
             }
-            ((MainActivity)view.getContext()).refreshArtesianListView();
+            Intent intent = new Intent(_mContext, ArtesianActivity.class);
+            _mContext.startActivity(intent);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -88,10 +69,5 @@ public class OnArtesianNavItemClickListener implements OnItemClickListener {
         }
     }
 
-    private void setupImageView(View view){
-        _mBitmap = null;
-        _mBitmap = BitmapFactory.decodeFile("/sdcard/Download/logo.png");
-        MainActivity.imageView.setImageBitmap(_mBitmap);
-    }
 
 }
