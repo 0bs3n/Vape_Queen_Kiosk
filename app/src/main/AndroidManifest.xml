@@ -35,22 +35,6 @@
             android:name=".kioskservices.KioskService"
             android:exported="false" />
 
-        <activity
-            android:name=".artesianblends.ArtesianActivity"
-            android:label="@string/title_activity_artesian"
-            android:parentActivityName=".MainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.thevapequeen.vapequeenkiosk.MainActivity" />
-        </activity>
-        <activity
-            android:name=".PremiumActivity"
-            android:label="@string/title_activity_premium"
-            android:parentActivityName=".MainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.thevapequeen.vapequeenkiosk.MainActivity" />
-        </activity>
     </application>
 
 </manifest>
