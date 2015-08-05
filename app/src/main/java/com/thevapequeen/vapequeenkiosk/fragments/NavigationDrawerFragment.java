@@ -1,4 +1,4 @@
-package com.thevapequeen.vapequeenkiosk.navigation;
+package com.thevapequeen.vapequeenkiosk.fragments;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
@@ -14,6 +14,10 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.thevapequeen.vapequeenkiosk.R;
+import com.thevapequeen.vapequeenkiosk.navigation.JuiceNavAdapter;
+import com.thevapequeen.vapequeenkiosk.navigation.JuiceNavItem;
+import com.thevapequeen.vapequeenkiosk.navigation.OnArtesianNavItemClickListener;
+import com.thevapequeen.vapequeenkiosk.navigation.OnPremiumNavItemClickListener;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;

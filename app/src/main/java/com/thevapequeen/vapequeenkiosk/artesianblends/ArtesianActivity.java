@@ -1,14 +1,23 @@
-package com.thevapequeen.vapequeenkiosk;
+package com.thevapequeen.vapequeenkiosk.artesianblends;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
 
-import com.thevapequeen.vapequeenkiosk.navigation.NavigationDrawerFragment;
+import com.thevapequeen.vapequeenkiosk.MainActivity;
+import com.thevapequeen.vapequeenkiosk.R;
+import com.thevapequeen.vapequeenkiosk.fragments.NavigationDrawerFragment;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,21 +27,35 @@ public class ArtesianActivity extends AppCompatActivity implements NavigationDra
 
     private final List blockedKeys = new ArrayList(Arrays.asList(KeyEvent.KEYCODE_VOLUME_DOWN, KeyEvent.KEYCODE_VOLUME_UP, KeyEvent.KEYCODE_HOME));
     private NavigationDrawerFragment mNavigationDrawerFragment;
+    public static ImageView imageViewArtesian;
+    public static TextView textViewArtesian;
+    private ArrayList<ArtesianBlend> mArtesianBlendList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent intent = this.getIntent();
         setupKioskState();
         setContentView(R.layout.activity_artesian);
+        imageViewArtesian = (ImageView)findViewById(R.id.imageViewArtesianActivity);
+        textViewArtesian = (TextView)findViewById(R.id.textViewArtesianActivity);
+        ListView listViewArtesian = (ListView)findViewById(R.id.listViewArtesianActivity);
+        Context ctx = ArtesianActivity.this.getApplicationContext();
 
+        setLogo();
         mNavigationDrawerFragment = MainActivity.mNavigationDrawerFragment;
-
+        mArtesianBlendList = new ArrayList<>();
+        mArtesianBlendList = intent.getParcelableArrayListExtra("artesians");
+        textViewArtesian.setText(mArtesianBlendList.get(0).getVqCategory());
+        Log.v("CATEGORYSET", textViewArtesian.getText().toString());
+        //Todo:Setup List using ArtesianBlendAdapter
+        listViewArtesian.setAdapter(new ArtesianAdapter(ctx,R.layout.item_artesian_blend,mArtesianBlendList));
+        Log.v("NUMBEROFSENT",String.valueOf(mArtesianBlendList.size()));
     }
 
     @Override
-    public void onBackPressed() {
-        // nothing to do here
-        // … kiosk mode app
-
+    public void onBackPressed(){
+        //Nothing
     }
 
     @Override
@@ -47,7 +70,6 @@ public class ArtesianActivity extends AppCompatActivity implements NavigationDra
 
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
-
         if (blockedKeys.contains(event.getKeyCode())) {
             return true;
         } else {
@@ -72,6 +94,11 @@ public class ArtesianActivity extends AppCompatActivity implements NavigationDra
         Settings.System.putInt(getContentResolver(),
                 Settings.System.SCREEN_BRIGHTNESS_MODE, Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL);
         Settings.System.putInt(getContentResolver(), Settings.System.SCREEN_BRIGHTNESS, 255);
+    }
+
+    private void setLogo(){
+        Bitmap bitmap = BitmapFactory.decodeFile("/sdcard/Download/logo.png");
+        ArtesianActivity.imageViewArtesian.setImageBitmap(bitmap);
     }
 
 }

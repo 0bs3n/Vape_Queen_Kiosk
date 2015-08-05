@@ -29,5 +29,6 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_premium">Premium</string>
+    <string name="content_main_logo">Main Logo</string>
 
 </resources>

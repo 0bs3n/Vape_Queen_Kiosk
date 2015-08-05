@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
@@ -16,10 +17,10 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.thevapequeen.vapequeenkiosk.navigation.NavigationDrawerFragment;
-import com.thevapequeen.vapequeenkiosk.navigation.OnPremiumNavItemClickListener;
+import com.thevapequeen.vapequeenkiosk.fragments.ItemListFragment;
+import com.thevapequeen.vapequeenkiosk.fragments.NavigationDrawerFragment;
+import com.thevapequeen.vapequeenkiosk.fragments.TopperFragment;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,10 +31,13 @@ import java.util.TimerTask;
 /**
  * Created by James Campbell for exclusive use by The Vape Queen. All rights reserved.
  */
-public class MainActivity extends AppCompatActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks{
+public class MainActivity extends AppCompatActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks,
+        ItemListFragment.OnFragmentInteractionListener, TopperFragment.OnFragmentInteractionListener{
 
     private final List blockedKeys = new ArrayList(Arrays.asList(KeyEvent.KEYCODE_VOLUME_DOWN, KeyEvent.KEYCODE_VOLUME_UP, KeyEvent.KEYCODE_HOME));
     public static NavigationDrawerFragment mNavigationDrawerFragment;
+    public static ItemListFragment mItemListFragment;
+    public static TopperFragment mTopperFragment;
 
     public static ImageView imageView;
     public static TextView textView;
@@ -55,7 +59,11 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
         mBitmap = BitmapFactory.decodeFile("/sdcard/Download/logo.png");
         imageView.setImageBitmap(mBitmap);
         textView = (TextView)findViewById(R.id.textViewMain);
-        startTimer();
+        startAnimationImageTimer();
+
+        mTopperFragment = (TopperFragment)getSupportFragmentManager().findFragmentById(R.id.fragment_topper);
+
+        mItemListFragment = (ItemListFragment)getSupportFragmentManager().findFragmentById(R.id.listViewFragmentList);
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
@@ -95,15 +103,19 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        //onResume we start our timer so it can start when the app comes from the background
-        startTimer();
+    public void onNavigationDrawerItemSelected(int position) {
+    //This callback to Nav must remain empty for custom layout
+    }
+
+
+    @Override
+    public void onFragmentTopperInteraction(Uri uri){
+
     }
 
     @Override
-    public void onNavigationDrawerItemSelected(int position) {
-    //This callback to Nav must remain empty for custom layout
+    public void onFragmentItemListInteraction(String string){
+
     }
 
     private void setupKioskState() {
@@ -123,21 +135,20 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
     private void animationImageFadeOut(Bitmap bitmap){
         Animation animationFadeOut = AnimationUtils.loadAnimation(this, R.anim.fadeout);
         imageView.startAnimation(animationFadeOut);
-        textView.startAnimation(animationFadeOut);
     }
 
-    public void startTimer() {
+    public void startAnimationImageTimer() {
         //set a new Timer
         timer = new Timer();
 
         //initialize the TimerTask's job
-        initializeTimerTask();
+        initializeAnimationImageTimerTask();
 
-        //schedule the timer, after the first 5000ms the TimerTask will run every 10000ms
-        timer.schedule(timerTask, 5000, 5500); //
+        //schedule the timer, after the first 2000ms the TimerTask will run every 4000ms
+        timer.schedule(timerTask, 2000, 4000); //
     }
 
-    private void initializeTimerTask() {
+    private void initializeAnimationImageTimerTask() {
 
         timerTask = new TimerTask() {
             public void run() {
@@ -149,17 +160,5 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
             }
         };
     }
-
-    public void refreshArtesianListView(){
-
-    }
-
-    public void refreshPremiumListView(){
-        Toast.makeText(this,OnPremiumNavItemClickListener._Brand, Toast.LENGTH_LONG).show();
-        Intent intent = new Intent(this,PremiumActivity.class);
-        startActivity(intent);
-    }
-
-
 
 }
