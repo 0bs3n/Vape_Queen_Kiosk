@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Vape Queen Kiosk</string>
+    <string name="app_name">Vape Queen Menu</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="vgpgsplitview">-</string>

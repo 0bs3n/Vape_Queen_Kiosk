@@ -5,12 +5,10 @@ package com.thevapequeen.vapequeenkiosk.navigation;
  */
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 
-import com.thevapequeen.vapequeenkiosk.PremiumActivity;
 import com.thevapequeen.vapequeenkiosk.fragments.NavigationDrawerFragment;
 import com.thevapequeen.vapequeenkiosk.premiumjuices.PremiumJuice;
 
@@ -56,9 +54,9 @@ public class OnPremiumNavItemClickListener implements OnItemClickListener {
                     premiumJuiceList.add(new PremiumJuice(_premiumjuice[0],_premiumjuice[1],_premiumjuice[2],_premiumjuice[3],_premiumjuice[4],_premiumjuice[5]));
                 }
             }
-            //Todo:Pass Extras
-            Intent intent = new Intent(_mContext, PremiumActivity.class);
-            _mContext.startActivity(intent);
+//            //Todo:Pass Extras
+//            Intent intent = new Intent(_mContext, PremiumActivity.class);
+//            _mContext.startActivity(intent);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {

@@ -6,14 +6,12 @@ package com.thevapequeen.vapequeenkiosk.navigation;
 
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.TextView;
 
 import com.thevapequeen.vapequeenkiosk.R;
-import com.thevapequeen.vapequeenkiosk.artesianblends.ArtesianActivity;
 import com.thevapequeen.vapequeenkiosk.artesianblends.ArtesianBlend;
 import com.thevapequeen.vapequeenkiosk.fragments.NavigationDrawerFragment;
 
@@ -57,9 +55,9 @@ public class OnArtesianNavItemClickListener implements OnItemClickListener {
                 }
             }
 
-            Intent intent = new Intent(_mContext, ArtesianActivity.class);
-            intent.putParcelableArrayListExtra("artesians", _artesianBlendList);
-            _mContext.startActivity(intent);
+//            Intent intent = new Intent(_mContext, ArtesianActivity.class);
+//            intent.putParcelableArrayListExtra("artesians", _artesianBlendList);
+//            _mContext.startActivity(intent);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {

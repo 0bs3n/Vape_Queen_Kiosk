@@ -1,22 +1,13 @@
 package com.thevapequeen.vapequeenkiosk;
 
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.provider.Settings;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.thevapequeen.vapequeenkiosk.fragments.ItemListFragment;
 import com.thevapequeen.vapequeenkiosk.fragments.NavigationDrawerFragment;
@@ -25,8 +16,6 @@ import com.thevapequeen.vapequeenkiosk.fragments.TopperFragment;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * Created by James Campbell for exclusive use by The Vape Queen. All rights reserved.
@@ -39,27 +28,11 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
     public static ItemListFragment mItemListFragment;
     public static TopperFragment mTopperFragment;
 
-    public static ImageView imageView;
-    public static TextView textView;
-    public static Bitmap mBitmap;
-    public static Context mcontext;
-
-    Timer timer;
-    TimerTask timerTask;
-    final Handler handler = new Handler();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setupKioskState();
         setContentView(R.layout.activity_main);
-        mcontext = this;
-
-        imageView = (ImageView)findViewById(R.id.imageViewMain);
-        mBitmap = BitmapFactory.decodeFile("/sdcard/Download/logo.png");
-        imageView.setImageBitmap(mBitmap);
-        textView = (TextView)findViewById(R.id.textViewMain);
-        startAnimationImageTimer();
 
         mTopperFragment = (TopperFragment)getSupportFragmentManager().findFragmentById(R.id.fragment_topper);
 
@@ -69,9 +42,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
 
         // Set up the drawer.
-        mNavigationDrawerFragment.setUp(
-                R.id.navigation_drawer,
-                (DrawerLayout) findViewById(R.id.drawer_layout));
+        mNavigationDrawerFragment.setUp(R.id.navigation_drawer,(DrawerLayout) findViewById(R.id.drawer_layout));
 
     }
 
@@ -109,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
 
 
     @Override
-    public void onFragmentTopperInteraction(Uri uri){
+    public void onFragmentTopperInteraction(String textTopper){
 
     }
 
@@ -132,33 +103,5 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
         Settings.System.putInt(getContentResolver(), Settings.System.SCREEN_BRIGHTNESS, 255);
     }
 
-    private void animationImageFadeOut(Bitmap bitmap){
-        Animation animationFadeOut = AnimationUtils.loadAnimation(this, R.anim.fadeout);
-        imageView.startAnimation(animationFadeOut);
-    }
-
-    public void startAnimationImageTimer() {
-        //set a new Timer
-        timer = new Timer();
-
-        //initialize the TimerTask's job
-        initializeAnimationImageTimerTask();
-
-        //schedule the timer, after the first 2000ms the TimerTask will run every 4000ms
-        timer.schedule(timerTask, 2000, 4000); //
-    }
-
-    private void initializeAnimationImageTimerTask() {
-
-        timerTask = new TimerTask() {
-            public void run() {
-                handler.post(new Runnable() {
-                    public void run() {
-                        animationImageFadeOut(mBitmap);
-                    }
-                });
-            }
-        };
-    }
 
 }
