@@ -103,5 +103,66 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
         Settings.System.putInt(getContentResolver(), Settings.System.SCREEN_BRIGHTNESS, 255);
     }
 
+//    public void setupArtesianBrandList(String brand){
+//        //_artesianBlendList.clear();
+//        String csvFile = "/sdcard/Download/artesian_juices.csv";
+//        BufferedReader br = null;
+//        String line = new String();
+//        String cvsSplitBy = ",";
+//        try {
+//            br = new BufferedReader(new FileReader(csvFile));
+//            while ((line = br.readLine()) != null) {
+//                String[] _artesianblend = line.split(cvsSplitBy);
+//                if(_artesianblend[5].equals(brand)){
+//                    //_artesianBlendList.add(new ArtesianBlend(_artesianblend[0], _artesianblend[1], _artesianblend[2], _artesianblend[3], _artesianblend[4], _artesianblend[5]));
+//                }
+//            }
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        } finally {
+//            if (br != null) {
+//                try {
+//                    br.close();
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }
+//    }
+//
+//    public void setupPremiumBrandList(String brand){
+//        //premiumJuiceList.clear();
+//        String csvFile = "/sdcard/Download/premium_juices.csv";
+//        BufferedReader br = null;
+//        String line = "";
+//        String cvsSplitBy = ",";
+//        try {
+//            br = new BufferedReader(new FileReader(csvFile));
+//            while ((line = br.readLine()) != null) {
+//                String[] _premiumjuice = line.split(cvsSplitBy);
+//                if(_premiumjuice[5].equals(brand)){
+//                    //premiumJuiceList.add(new PremiumJuice(_premiumjuice[0],_premiumjuice[1],_premiumjuice[2],_premiumjuice[3],_premiumjuice[4],_premiumjuice[5]));
+//                }
+//            }
+////            //Todo:Pass Extras
+////            Intent intent = new Intent(_mContext, PremiumActivity.class);
+////            _mContext.startActivity(intent);
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        } finally {
+//            if (br != null) {
+//                try {
+//                    br.close();
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }
+//    }
+
 
 }

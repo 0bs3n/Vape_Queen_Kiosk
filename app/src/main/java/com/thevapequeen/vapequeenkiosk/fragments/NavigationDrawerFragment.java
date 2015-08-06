@@ -11,13 +11,12 @@ import android.support.v4.widget.DrawerLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.thevapequeen.vapequeenkiosk.R;
 import com.thevapequeen.vapequeenkiosk.navigation.JuiceNavAdapter;
 import com.thevapequeen.vapequeenkiosk.navigation.JuiceNavItem;
-import com.thevapequeen.vapequeenkiosk.navigation.OnArtesianNavItemClickListener;
-import com.thevapequeen.vapequeenkiosk.navigation.OnPremiumNavItemClickListener;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -94,12 +93,22 @@ public class NavigationDrawerFragment extends Fragment {
         setupArtesianCategoryList();
         mDrawerArtesianListView = (ListView) v.findViewById(R.id.listviewArtesianCategories);
         mDrawerArtesianListView.setAdapter(new JuiceNavAdapter(artesianNavJuice, inflater));
-        mDrawerArtesianListView.setOnItemClickListener(new OnArtesianNavItemClickListener());
+        mDrawerArtesianListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+            }
+        });
 
         setupPremiumBrandList();
         mDrawerPremiumListView = (ListView) v.findViewById(R.id.listviewPremiumBrands);
         mDrawerPremiumListView.setAdapter(new JuiceNavAdapter(premiumNavJuice, inflater));
-        mDrawerPremiumListView.setOnItemClickListener(new OnPremiumNavItemClickListener());
+        mDrawerPremiumListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+            }
+        });
         return v;
     }
 
@@ -159,7 +168,7 @@ public class NavigationDrawerFragment extends Fragment {
         /**
          * Called when an item in the navigation drawer is selected.
          */
-
+        //Todo: This will be telling the Main Activity what to
         void onNavigationDrawerItemSelected(int position);
     }
 

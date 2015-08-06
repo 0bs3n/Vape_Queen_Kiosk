@@ -22,13 +22,6 @@
     <string name="text_medium">Medium Text</string>
     <string name="text_small">Small Text</string>
 
-<!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_artesian">Artesian</string>
-
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
-    <string name="title_activity_premium">Premium</string>
     <string name="content_main_logo">Main Logo</string>
 
 </resources>
