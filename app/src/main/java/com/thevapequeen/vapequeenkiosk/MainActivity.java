@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
     }
 
     @Override
-    public void onNavigationDrawerItemSelected(int position) {
+    public void onNavigationDrawerItemSelected(String juiceType, String juiceBrand) {
     //This callback to Nav must remain empty for custom layout
     }
 

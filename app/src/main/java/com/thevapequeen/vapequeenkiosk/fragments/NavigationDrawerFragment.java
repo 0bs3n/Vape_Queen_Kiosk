@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.thevapequeen.vapequeenkiosk.R;
 import com.thevapequeen.vapequeenkiosk.navigation.JuiceNavAdapter;
@@ -61,6 +62,9 @@ public class NavigationDrawerFragment extends Fragment {
     private List<JuiceNavItem> artesianNavJuice = new ArrayList<>();
     private List<JuiceNavItem> premiumNavJuice = new ArrayList<>();
 
+    private String _mNavFragType;
+    private String _mNavFragBrand;
+
     public NavigationDrawerFragment() {
     }
 
@@ -96,7 +100,9 @@ public class NavigationDrawerFragment extends Fragment {
         mDrawerArtesianListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                _mNavFragType = "Artesian";
+                _mNavFragBrand = ((TextView)view.findViewById(R.id.textViewNavItem)).getText().toString();
+                mDrawerLayout.closeDrawers();
             }
         });
 
@@ -106,7 +112,9 @@ public class NavigationDrawerFragment extends Fragment {
         mDrawerPremiumListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                _mNavFragType = "Premium";
+                _mNavFragBrand = ((TextView)view.findViewById(R.id.textViewNavItem)).getText().toString();
+                mDrawerLayout.closeDrawers();
             }
         });
         return v;
@@ -169,14 +177,14 @@ public class NavigationDrawerFragment extends Fragment {
          * Called when an item in the navigation drawer is selected.
          */
         //Todo: This will be telling the Main Activity what to
-        void onNavigationDrawerItemSelected(int position);
+        void onNavigationDrawerItemSelected(String type, String brand);
     }
 
-    public void setupArtesianCategoryList(){
+    private void setupArtesianCategoryList(){
         artesianNavJuice.clear();
         String csvFile = getString(R.string.artesian_categories_file);
         BufferedReader br = null;
-        String line = "";
+        String line;
         String cvsSplitBy = ",";
         try {
             br = new BufferedReader(new FileReader(csvFile));
@@ -201,7 +209,7 @@ public class NavigationDrawerFragment extends Fragment {
         }
     }
 
-    public void setupPremiumBrandList(){
+    private void setupPremiumBrandList(){
         premiumNavJuice.clear();
         String csvFile = getString(R.string.premium_brands_file);
         BufferedReader br = null;
