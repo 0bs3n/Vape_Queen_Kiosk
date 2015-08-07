@@ -36,9 +36,19 @@ public class TopperFragment extends Fragment {
     public static Bitmap mBitmap;
     final Handler handler = new Handler();
 
-    public static TopperFragment newInstance(String param1, String param2) {
+    private String juiceType;
+    private String juiceBrand;
+
+    // TODO: Rename parameter arguments, choose names that match
+    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private static final String ARG_NAVTYPE = "juiceType";
+    private static final String ARG_NAVBRAND = "juiceBrand";
+
+    public static TopperFragment newInstance(String juiceType, String juiceBrand) {
         TopperFragment fragment = new TopperFragment();
         Bundle args = new Bundle();
+        args.putString(ARG_NAVTYPE, "juiceType");
+        args.putString(ARG_NAVBRAND, "juiceBrand");
         fragment.setArguments(args);
         return fragment;
     }
@@ -57,10 +67,13 @@ public class TopperFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_topper, container, false);
+
         imageViewTopper = (ImageView)view.findViewById(R.id.imageViewMain);
-        setInitialLogo();
         textViewTopper = (TextView)view.findViewById(R.id.textViewMain);
+
+        setInitialLogo();
         setInitialText();
+
         // Inflate the layout for this fragment
         return view;
     }
@@ -106,12 +119,16 @@ public class TopperFragment extends Fragment {
         textViewTopper.setText(getString(R.string.app_name));
     }
 
+    public static void changeText(String juiceBrand){
+        textViewTopper.setText(juiceBrand);
+    }
+
     private void animationImageFadeOut(Bitmap bitmap){
         Animation animationFadeOut = AnimationUtils.loadAnimation(getActivity().getApplicationContext(), R.anim.fadeout);
         imageViewTopper.startAnimation(animationFadeOut);
     }
 
-    public void startAnimationImageTimer() {
+    private void startAnimationImageTimer() {
         //set a new Timer
         Timer timer;
         timer = new Timer();
@@ -135,5 +152,7 @@ public class TopperFragment extends Fragment {
             }
         };
     }
+
+
 
 }

@@ -32,7 +32,6 @@ import java.util.List;
  * design guidelines</a> for a complete explanation of the behaviors implemented here.
  */
 public class NavigationDrawerFragment extends Fragment {
-
     /**
      * Remember the position of the selected item.
      */
@@ -102,7 +101,8 @@ public class NavigationDrawerFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 _mNavFragType = "Artesian";
                 _mNavFragBrand = ((TextView)view.findViewById(R.id.textViewNavItem)).getText().toString();
-                mDrawerLayout.closeDrawers();
+                mCallbacks.onNavigationDrawerItemSelected(_mNavFragType, _mNavFragBrand);
+                mDrawerLayout.closeDrawer(mFragmentContainerView);
             }
         });
 
@@ -114,7 +114,8 @@ public class NavigationDrawerFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 _mNavFragType = "Premium";
                 _mNavFragBrand = ((TextView)view.findViewById(R.id.textViewNavItem)).getText().toString();
-                mDrawerLayout.closeDrawers();
+                mCallbacks.onNavigationDrawerItemSelected(_mNavFragType,_mNavFragBrand);
+                mDrawerLayout.closeDrawer(mFragmentContainerView);
             }
         });
         return v;
@@ -176,7 +177,6 @@ public class NavigationDrawerFragment extends Fragment {
         /**
          * Called when an item in the navigation drawer is selected.
          */
-        //Todo: This will be telling the Main Activity what to
         void onNavigationDrawerItemSelected(String type, String brand);
     }
 

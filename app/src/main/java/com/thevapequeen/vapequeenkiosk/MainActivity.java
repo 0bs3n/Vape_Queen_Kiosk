@@ -34,15 +34,15 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
         setupKioskState();
         setContentView(R.layout.activity_main);
 
-        mTopperFragment = (TopperFragment)getSupportFragmentManager().findFragmentById(R.id.fragment_topper);
-
-        mItemListFragment = (ItemListFragment)getSupportFragmentManager().findFragmentById(R.id.listViewFragmentList);
-
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
 
         // Set up the drawer.
-        mNavigationDrawerFragment.setUp(R.id.navigation_drawer,(DrawerLayout) findViewById(R.id.drawer_layout));
+        mNavigationDrawerFragment.setUp(R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout));
+
+        mItemListFragment = (ItemListFragment)getSupportFragmentManager().findFragmentById(R.id.listViewFragmentList);
+
+        mTopperFragment = (TopperFragment)getSupportFragmentManager().findFragmentById(R.id.textViewMain);
 
     }
 
@@ -75,7 +75,12 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
 
     @Override
     public void onNavigationDrawerItemSelected(String juiceType, String juiceBrand) {
-    //This callback to Nav must remain empty for custom layout
+        // Within the activity
+//        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+//        TopperFragment fragmentTopper = TopperFragment.newInstance("","");
+//        ft.replace(R.id.fragment_topper, fragmentTopper);
+//        ft.commit();
+        TopperFragment.changeText(juiceBrand);
     }
 
 
