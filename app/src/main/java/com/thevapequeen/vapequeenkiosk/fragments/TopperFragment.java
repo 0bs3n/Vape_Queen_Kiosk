@@ -9,14 +9,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
+import android.view.animation.AlphaAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.thevapequeen.vapequeenkiosk.R;
 
-import java.util.Timer;
 import java.util.TimerTask;
 
 /**
@@ -32,6 +30,7 @@ public class TopperFragment extends Fragment {
     private OnFragmentInteractionListener mListenerFragmentTopper;
     private static ImageView imageViewTopper;
     private static TextView textViewTopper;
+    public static AlphaAnimation anim = new AlphaAnimation(1.0f, 0.0f);
     private static TimerTask timerTask;
     public static Bitmap mBitmap;
     final Handler handler = new Handler();
@@ -69,11 +68,10 @@ public class TopperFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_topper, container, false);
 
         imageViewTopper = (ImageView)view.findViewById(R.id.imageViewMain);
-        textViewTopper = (TextView)view.findViewById(R.id.textViewMain);
-
         setInitialLogo();
-        setInitialText();
 
+        textViewTopper = (TextView)view.findViewById(R.id.textViewMain);
+        setInitialText();
         // Inflate the layout for this fragment
         return view;
     }
@@ -112,7 +110,11 @@ public class TopperFragment extends Fragment {
     private void setInitialLogo(){
         Bitmap bitmap = BitmapFactory.decodeFile("/sdcard/Download/logo.png");
         imageViewTopper.setImageBitmap(bitmap);
-        startAnimationImageTimer();
+
+    }
+
+    public static void setImageViewTopper(Bitmap bitmap){
+        imageViewTopper.setImageBitmap(bitmap);
     }
 
     private void setInitialText(){
@@ -123,35 +125,6 @@ public class TopperFragment extends Fragment {
         textViewTopper.setText(juiceBrand);
     }
 
-    private void animationImageFadeOut(Bitmap bitmap){
-        Animation animationFadeOut = AnimationUtils.loadAnimation(getActivity().getApplicationContext(), R.anim.fadeout);
-        imageViewTopper.startAnimation(animationFadeOut);
-    }
-
-    private void startAnimationImageTimer() {
-        //set a new Timer
-        Timer timer;
-        timer = new Timer();
-
-        //initialize the TimerTask's job
-        initializeAnimationImageTimerTask();
-
-        //schedule the timer, after the first 2000ms the TimerTask will run every 4000ms
-        timer.schedule(timerTask, 2000, 6000); //
-    }
-
-    private void initializeAnimationImageTimerTask() {
-
-        timerTask = new TimerTask() {
-            public void run() {
-                handler.post(new Runnable() {
-                    public void run() {
-                        animationImageFadeOut(mBitmap);
-                    }
-                });
-            }
-        };
-    }
 
 
 

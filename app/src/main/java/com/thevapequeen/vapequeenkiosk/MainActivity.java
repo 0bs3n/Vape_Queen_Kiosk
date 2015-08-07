@@ -1,6 +1,8 @@
 package com.thevapequeen.vapequeenkiosk;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v4.widget.DrawerLayout;
@@ -9,10 +11,15 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
 
-import com.thevapequeen.vapequeenkiosk.fragments.ItemListFragment;
+import com.thevapequeen.vapequeenkiosk.artesianblends.ArtesianBlend;
 import com.thevapequeen.vapequeenkiosk.fragments.NavigationDrawerFragment;
 import com.thevapequeen.vapequeenkiosk.fragments.TopperFragment;
+import com.thevapequeen.vapequeenkiosk.premiumjuices.PremiumJuice;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -21,12 +28,14 @@ import java.util.List;
  * Created by James Campbell for exclusive use by The Vape Queen. All rights reserved.
  */
 public class MainActivity extends AppCompatActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks,
-        ItemListFragment.OnFragmentInteractionListener, TopperFragment.OnFragmentInteractionListener{
+         TopperFragment.OnFragmentInteractionListener {
 
     private final List blockedKeys = new ArrayList(Arrays.asList(KeyEvent.KEYCODE_VOLUME_DOWN, KeyEvent.KEYCODE_VOLUME_UP, KeyEvent.KEYCODE_HOME));
     public static NavigationDrawerFragment mNavigationDrawerFragment;
-    public static ItemListFragment mItemListFragment;
     public static TopperFragment mTopperFragment;
+
+    private ArrayList<ArtesianBlend> artesianBlendArrayList = new ArrayList<>();
+    private ArrayList<PremiumJuice> premiumJuiceArrayList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +49,6 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
         // Set up the drawer.
         mNavigationDrawerFragment.setUp(R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout));
 
-        mItemListFragment = (ItemListFragment)getSupportFragmentManager().findFragmentById(R.id.listViewFragmentList);
-
         mTopperFragment = (TopperFragment)getSupportFragmentManager().findFragmentById(R.id.textViewMain);
 
     }
@@ -50,7 +57,6 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
     public void onBackPressed() {
         // nothing to do here
         // … kiosk mode app
-
     }
 
     @Override
@@ -75,22 +81,24 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
 
     @Override
     public void onNavigationDrawerItemSelected(String juiceType, String juiceBrand) {
-        // Within the activity
-//        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-//        TopperFragment fragmentTopper = TopperFragment.newInstance("","");
-//        ft.replace(R.id.fragment_topper, fragmentTopper);
-//        ft.commit();
         TopperFragment.changeText(juiceBrand);
+        if(juiceType.equals("Artesian")){
+            Bitmap bitmap = BitmapFactory.decodeFile("/sdcard/Download/logo.png");
+            TopperFragment.setImageViewTopper(bitmap);
+            //Pass to List Fragment
+        }
+        else if(juiceType.equals("Premium")){
+            Bitmap bitmap = BitmapFactory.decodeFile("/sdcard/Download/" + juiceBrand.toLowerCase().replaceAll(" ","") + ".bmp");
+            TopperFragment.setImageViewTopper(bitmap);
+            //Pass to List Fragment
+        }
+        else{
+            //Nothing To See Here. Move Along.
+        }
     }
-
 
     @Override
     public void onFragmentTopperInteraction(String textTopper){
-
-    }
-
-    @Override
-    public void onFragmentItemListInteraction(String string){
 
     }
 
@@ -108,66 +116,63 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
         Settings.System.putInt(getContentResolver(), Settings.System.SCREEN_BRIGHTNESS, 255);
     }
 
-//    public void setupArtesianBrandList(String brand){
-//        //_artesianBlendList.clear();
-//        String csvFile = "/sdcard/Download/artesian_juices.csv";
-//        BufferedReader br = null;
-//        String line = new String();
-//        String cvsSplitBy = ",";
-//        try {
-//            br = new BufferedReader(new FileReader(csvFile));
-//            while ((line = br.readLine()) != null) {
-//                String[] _artesianblend = line.split(cvsSplitBy);
-//                if(_artesianblend[5].equals(brand)){
-//                    //_artesianBlendList.add(new ArtesianBlend(_artesianblend[0], _artesianblend[1], _artesianblend[2], _artesianblend[3], _artesianblend[4], _artesianblend[5]));
-//                }
-//            }
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        } finally {
-//            if (br != null) {
-//                try {
-//                    br.close();
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        }
-//    }
-//
-//    public void setupPremiumBrandList(String brand){
-//        //premiumJuiceList.clear();
-//        String csvFile = "/sdcard/Download/premium_juices.csv";
-//        BufferedReader br = null;
-//        String line = "";
-//        String cvsSplitBy = ",";
-//        try {
-//            br = new BufferedReader(new FileReader(csvFile));
-//            while ((line = br.readLine()) != null) {
-//                String[] _premiumjuice = line.split(cvsSplitBy);
-//                if(_premiumjuice[5].equals(brand)){
-//                    //premiumJuiceList.add(new PremiumJuice(_premiumjuice[0],_premiumjuice[1],_premiumjuice[2],_premiumjuice[3],_premiumjuice[4],_premiumjuice[5]));
-//                }
-//            }
-////            //Todo:Pass Extras
-////            Intent intent = new Intent(_mContext, PremiumActivity.class);
-////            _mContext.startActivity(intent);
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        } finally {
-//            if (br != null) {
-//                try {
-//                    br.close();
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        }
-//    }
+    public void setupArtesianBrandList(String brand){
+        artesianBlendArrayList.clear();
+        String csvFile = "/sdcard/Download/artesian_juices.csv";
+        BufferedReader br = null;
+        String line = new String();
+        String cvsSplitBy = ",";
+        try {
+            br = new BufferedReader(new FileReader(csvFile));
+            while ((line = br.readLine()) != null) {
+                String[] _artesianblend = line.split(cvsSplitBy);
+                if(_artesianblend[5].equals(brand)){
+                    artesianBlendArrayList.add(new ArtesianBlend(_artesianblend[0], _artesianblend[1], _artesianblend[2], _artesianblend[3], _artesianblend[4], _artesianblend[5]));
+                }
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (br != null) {
+                try {
+                    br.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public void setupPremiumBrandList(String brand){
+        premiumJuiceArrayList.clear();
+        String csvFile = "/sdcard/Download/premium_juices.csv";
+        BufferedReader br = null;
+        String line = "";
+        String cvsSplitBy = ",";
+        try {
+            br = new BufferedReader(new FileReader(csvFile));
+            while ((line = br.readLine()) != null) {
+                String[] _premiumjuice = line.split(cvsSplitBy);
+                if(_premiumjuice[5].equals(brand)){
+                    premiumJuiceArrayList.add(new PremiumJuice(_premiumjuice[0],_premiumjuice[1],_premiumjuice[2],_premiumjuice[3],_premiumjuice[4],_premiumjuice[5]));
+                }
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (br != null) {
+                try {
+                    br.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 
 
 }
