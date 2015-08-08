@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.WindowManager;
 
 import com.thevapequeen.vapequeenkiosk.artesianblends.ArtesianBlend;
+import com.thevapequeen.vapequeenkiosk.fragments.ItemFragment;
 import com.thevapequeen.vapequeenkiosk.fragments.NavigationDrawerFragment;
 import com.thevapequeen.vapequeenkiosk.fragments.TopperFragment;
 import com.thevapequeen.vapequeenkiosk.premiumjuices.PremiumJuice;
@@ -28,11 +29,12 @@ import java.util.List;
  * Created by James Campbell for exclusive use by The Vape Queen. All rights reserved.
  */
 public class MainActivity extends AppCompatActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks,
-         TopperFragment.OnFragmentInteractionListener {
+         TopperFragment.OnFragmentInteractionListener, ItemFragment.OnFragmentInteractionListener {
 
     private final List blockedKeys = new ArrayList(Arrays.asList(KeyEvent.KEYCODE_VOLUME_DOWN, KeyEvent.KEYCODE_VOLUME_UP, KeyEvent.KEYCODE_HOME));
     public static NavigationDrawerFragment mNavigationDrawerFragment;
     public static TopperFragment mTopperFragment;
+    public static ItemFragment mItemFragment;
 
     private ArrayList<ArtesianBlend> artesianBlendArrayList = new ArrayList<>();
     private ArrayList<PremiumJuice> premiumJuiceArrayList = new ArrayList<>();
@@ -86,11 +88,15 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
             Bitmap bitmap = BitmapFactory.decodeFile("/sdcard/Download/logo.png");
             TopperFragment.setImageViewTopper(bitmap);
             //Pass to List Fragment
+            setupArtesianBrandList(juiceBrand);
+            ItemFragment.setupArtesianList(juiceType,artesianBlendArrayList);
         }
         else if(juiceType.equals("Premium")){
             Bitmap bitmap = BitmapFactory.decodeFile("/sdcard/Download/" + juiceBrand.toLowerCase().replaceAll(" ","") + ".bmp");
             TopperFragment.setImageViewTopper(bitmap);
             //Pass to List Fragment
+            setupPremiumBrandList(juiceBrand);
+            ItemFragment.setupPremiumList(juiceType, premiumJuiceArrayList);
         }
         else{
             //Nothing To See Here. Move Along.
@@ -99,6 +105,11 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
 
     @Override
     public void onFragmentTopperInteraction(String textTopper){
+
+    }
+
+    @Override
+    public void onFragmentItemInteraction(String string){
 
     }
 
