@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 import com.thevapequeen.vapequeenkiosk.R;
 import com.thevapequeen.vapequeenkiosk.artesianblends.ArtesianBlend;
@@ -25,29 +26,22 @@ import java.util.ArrayList;
 public class ItemFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private static final String ARG_TYPE = "";
+    private static final ArrayList<ArtesianBlend> ARG_LIST = new ArrayList<>();
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    String mJuiceType;
+    public static ArrayList<ArtesianBlend> mArtesianItemList = new ArrayList<>();
+    public static ArrayList<PremiumJuice> mPremiumItemList = new ArrayList<>();
+
+    public static ListView listView;
 
     private OnFragmentInteractionListener mListener;
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ItemFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ItemFragment newInstance(String param1, String param2) {
+    public static ItemFragment newInstance(String mJuiceType) {
         ItemFragment fragment = new ItemFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putString(ARG_TYPE, mJuiceType);
         fragment.setArguments(args);
         return fragment;
     }
@@ -60,16 +54,18 @@ public class ItemFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            mJuiceType = getArguments().getString(ARG_TYPE);
+
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View v= inflater.inflate(R.layout.fragment_item, container, false);
+        listView = (ListView)v.findViewById(R.id.listViewMain);
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_item, container, false);
+        return v;
     }
 
     @Override
@@ -102,15 +98,20 @@ public class ItemFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         public void onFragmentItemInteraction(String string);
+
     }
 
     public static void setupArtesianList(String artesian, ArrayList<ArtesianBlend> artesianBlends){
-        Log.v("ARTESIAN", artesian + artesianBlends.size());
+
+        mArtesianItemList = artesianBlends;
+        Log.v("ARTESIAN", mArtesianItemList.get(0).getVqName());
 
     }
 
     public static void setupPremiumList(String premium, ArrayList<PremiumJuice> premiumJuices){
-        Log.v("PREMIUM", premium + premiumJuices.size());
+
+        mPremiumItemList = premiumJuices;
+        Log.v("PREMIUM", mPremiumItemList.get(0).getPjName());
 
     }
 
