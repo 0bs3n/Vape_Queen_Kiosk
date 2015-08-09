@@ -55,7 +55,7 @@ public class ArtesianAdapter extends BaseAdapter {
         final ViewItem itemAdapter;
 
         if (convertView == null) {
-            convertView = vi.inflate(R.layout.item_artesian_blend, null);
+            convertView = vi.inflate(R.layout.item_artesian_blend, parent);
             itemAdapter = new ViewItem();
             itemAdapter.jNumber = (TextView) convertView.findViewById(R.id.textViewHouseNumber);
             itemAdapter.jName = (TextView) convertView.findViewById(R.id.textViewHouseName);

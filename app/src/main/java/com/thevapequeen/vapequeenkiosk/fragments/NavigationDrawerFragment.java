@@ -46,23 +46,23 @@ public class NavigationDrawerFragment extends Fragment {
     /**
      * A pointer to the current callbacks instance (the Activity).
      */
-    private NavigationDrawerCallbacks mCallbacks;
+    NavigationDrawerCallbacks mCallbacks;
 
-    public static DrawerLayout mDrawerLayout;
-    public static View mFragmentContainerView;
+    DrawerLayout mDrawerLayout;
+    View mFragmentContainerView;
 
-    private int mCurrentSelectedPosition = 0;
-    private boolean mFromSavedInstanceState;
-    private boolean mUserLearnedDrawer;
+    int mCurrentSelectedPosition = 0;
+    boolean mFromSavedInstanceState;
+    boolean mUserLearnedDrawer;
 
-    private ListView mDrawerArtesianListView;
-    private ListView mDrawerPremiumListView;
+    ListView mDrawerArtesianListView;
+    ListView mDrawerPremiumListView;
 
-    private List<JuiceNavItem> artesianNavJuice = new ArrayList<>();
-    private List<JuiceNavItem> premiumNavJuice = new ArrayList<>();
+    List<JuiceNavItem> artesianNavJuice = new ArrayList<>();
+    List<JuiceNavItem> premiumNavJuice = new ArrayList<>();
 
-    private String _mNavFragType;
-    private String _mNavFragBrand;
+    String _mNavFragType;
+    String _mNavFragBrand;
 
     public NavigationDrawerFragment() {
     }
@@ -173,7 +173,7 @@ public class NavigationDrawerFragment extends Fragment {
     /**
      * Callbacks interface that all activities using this fragment must implement.
      */
-    public static interface NavigationDrawerCallbacks {
+    public interface NavigationDrawerCallbacks {
         /**
          * Called when an item in the navigation drawer is selected.
          */

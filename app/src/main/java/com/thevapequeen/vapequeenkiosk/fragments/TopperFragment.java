@@ -9,45 +9,26 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AlphaAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.thevapequeen.vapequeenkiosk.R;
 
-import java.util.TimerTask;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link TopperFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link TopperFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class TopperFragment extends Fragment {
 
     private OnFragmentInteractionListener mListenerFragmentTopper;
-    private static ImageView imageViewTopper;
-    private static TextView textViewTopper;
-    public static AlphaAnimation anim = new AlphaAnimation(1.0f, 0.0f);
-    private static TimerTask timerTask;
-    public static Bitmap mBitmap;
+    public static ImageView imageViewTopper;
+    public static TextView textViewTopper;
+    public Bitmap mBitmap;
     final Handler handler = new Handler();
 
     private String juiceType;
     private String juiceBrand;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_NAVTYPE = "juiceType";
-    private static final String ARG_NAVBRAND = "juiceBrand";
-
-    public static TopperFragment newInstance(String juiceType, String juiceBrand) {
+    public TopperFragment newInstance(String juiceType, String juiceBrand) {
         TopperFragment fragment = new TopperFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_NAVTYPE, "juiceType");
-        args.putString(ARG_NAVBRAND, "juiceBrand");
         fragment.setArguments(args);
         return fragment;
     }
@@ -93,16 +74,6 @@ public class TopperFragment extends Fragment {
         mListenerFragmentTopper = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFragmentInteractionListener {
         public void onFragmentTopperInteraction(String textTopper);
     }
@@ -110,10 +81,9 @@ public class TopperFragment extends Fragment {
     private void setInitialLogo(){
         Bitmap bitmap = BitmapFactory.decodeFile("/sdcard/Download/logo.png");
         imageViewTopper.setImageBitmap(bitmap);
-
     }
 
-    public static void setImageViewTopper(Bitmap bitmap){
+    public void setImageViewTopper(Bitmap bitmap){
         imageViewTopper.setImageBitmap(bitmap);
     }
 
@@ -121,7 +91,7 @@ public class TopperFragment extends Fragment {
         textViewTopper.setText(getString(R.string.app_name));
     }
 
-    public static void changeText(String juiceBrand){
+    public void setText(String juiceBrand){
         textViewTopper.setText(juiceBrand);
     }
 

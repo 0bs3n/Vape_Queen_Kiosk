@@ -32,9 +32,10 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
          TopperFragment.OnFragmentInteractionListener, ItemFragment.OnFragmentInteractionListener {
 
     private final List blockedKeys = new ArrayList(Arrays.asList(KeyEvent.KEYCODE_VOLUME_DOWN, KeyEvent.KEYCODE_VOLUME_UP, KeyEvent.KEYCODE_HOME));
-    public static NavigationDrawerFragment mNavigationDrawerFragment;
-    public static TopperFragment mTopperFragment;
-    public static ItemFragment mItemFragment;
+
+    NavigationDrawerFragment mNavigationDrawerFragment;
+    TopperFragment mTopperFragment;
+    ItemFragment mItemFragment;
 
     private ArrayList<ArtesianBlend> artesianBlendArrayList = new ArrayList<>();
     private ArrayList<PremiumJuice> premiumJuiceArrayList = new ArrayList<>();
@@ -45,13 +46,13 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
         setupKioskState();
         setContentView(R.layout.activity_main);
 
-        mNavigationDrawerFragment = (NavigationDrawerFragment)
-                getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
+        mNavigationDrawerFragment = (NavigationDrawerFragment)getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
 
-        // Set up the drawer.
         mNavigationDrawerFragment.setUp(R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout));
 
-        mTopperFragment = (TopperFragment)getSupportFragmentManager().findFragmentById(R.id.textViewMain);
+        mTopperFragment = (TopperFragment)getSupportFragmentManager().findFragmentById(R.id.fragment_topper);
+
+        mItemFragment = (ItemFragment)getSupportFragmentManager().findFragmentById(R.id.fragment_item);
 
     }
 
@@ -73,7 +74,6 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
 
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
-
         if (blockedKeys.contains(event.getKeyCode())) {
             return true;
         } else {
@@ -83,20 +83,11 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
 
     @Override
     public void onNavigationDrawerItemSelected(String juiceType, String juiceBrand) {
-        TopperFragment.changeText(juiceBrand);
         if(juiceType.equals("Artesian")){
-            Bitmap bitmap = BitmapFactory.decodeFile("/sdcard/Download/logo.png");
-            TopperFragment.setImageViewTopper(bitmap);
-            //Pass to List Fragment
-            setupArtesianBrandList(juiceBrand);
-            ItemFragment.setupArtesianList(juiceType,artesianBlendArrayList);
+            setItemFragmentArtesianList(juiceType, juiceBrand);
         }
         else if(juiceType.equals("Premium")){
-            Bitmap bitmap = BitmapFactory.decodeFile("/sdcard/Download/" + juiceBrand.toLowerCase().replaceAll(" ","") + ".bmp");
-            TopperFragment.setImageViewTopper(bitmap);
-            //Pass to List Fragment
-            setupPremiumBrandList(juiceBrand);
-            ItemFragment.setupPremiumList(juiceType, premiumJuiceArrayList);
+            setItemFragmentPremiumList(juiceType, juiceBrand);
         }
         else{
             //Nothing To See Here. Move Along.
@@ -127,11 +118,11 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
         Settings.System.putInt(getContentResolver(), Settings.System.SCREEN_BRIGHTNESS, 255);
     }
 
-    public void setupArtesianBrandList(String brand){
+    private void setupArtesianBrandList(String brand){
         artesianBlendArrayList.clear();
         String csvFile = "/sdcard/Download/artesian_juices.csv";
         BufferedReader br = null;
-        String line = new String();
+        String line;
         String cvsSplitBy = ",";
         try {
             br = new BufferedReader(new FileReader(csvFile));
@@ -156,11 +147,11 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
         }
     }
 
-    public void setupPremiumBrandList(String brand){
+    private void setupPremiumBrandList(String brand){
         premiumJuiceArrayList.clear();
         String csvFile = "/sdcard/Download/premium_juices.csv";
         BufferedReader br = null;
-        String line = "";
+        String line;
         String cvsSplitBy = ",";
         try {
             br = new BufferedReader(new FileReader(csvFile));
@@ -183,6 +174,24 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
                 }
             }
         }
+    }
+
+    private void setItemFragmentArtesianList(String juiceType, String juiceBrand){
+        mTopperFragment.setText(juiceBrand);
+        Bitmap bitmap = BitmapFactory.decodeFile("/sdcard/Download/logo.png");
+        mTopperFragment.setImageViewTopper(bitmap);
+        //Pass to List Fragment
+        setupArtesianBrandList(juiceBrand);
+        mItemFragment.setupArtesianList(juiceType,artesianBlendArrayList);
+    }
+
+    private void setItemFragmentPremiumList(String juiceType,String juiceBrand){
+        mTopperFragment.setText(juiceBrand);
+        Bitmap bitmap = BitmapFactory.decodeFile("/sdcard/Download/" + juiceBrand.toLowerCase().replaceAll(" ","") + ".bmp");
+        mTopperFragment.setImageViewTopper(bitmap);
+        //Pass to List Fragment
+        setupPremiumBrandList(juiceBrand);
+        mItemFragment.setupPremiumList(juiceType, premiumJuiceArrayList);
     }
 
 

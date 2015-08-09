@@ -22,13 +22,13 @@
             tools:layout="@layout/fragment_topper"
             android:layout_gravity="center_horizontal" />
 
-        <!--<fragment
+        <fragment
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/fragment_list_artesian"
-            android:name="com.thevapequeen.vapequeenkiosk.fragments.ItemListFragment"
-            tools:layout="@layout/fragment_list_main"
-            android:layout_gravity="center_horizontal|bottom" />-->
+            android:id="@+id/fragment_item"
+            android:name="com.thevapequeen.vapequeenkiosk.fragments.ItemFragment"
+            tools:layout="@layout/fragment_item"
+            android:layout_gravity="center_horizontal|bottom" />
 
     </FrameLayout>
     <!-- android:layout_gravity="start" tells DrawerLayout to treat
