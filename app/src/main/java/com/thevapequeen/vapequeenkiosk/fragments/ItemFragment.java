@@ -2,13 +2,10 @@ package com.thevapequeen.vapequeenkiosk.fragments;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.util.Log;
+import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
-import android.widget.Toast;
 
 import com.thevapequeen.vapequeenkiosk.R;
 import com.thevapequeen.vapequeenkiosk.artesianblends.ArtesianAdapter;
@@ -20,16 +17,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class ItemFragment extends Fragment {
-    private String mJuiceType;
-    private List<ArtesianBlend> mArtesianItemList = new ArrayList<>();
-    private ArrayList<PremiumJuice> mPremiumItemList = new ArrayList<>();
-    private ArtesianAdapter artesianAdapter;
-    private PremiumAdapter premiumAdapter;
+public class ItemFragment extends ListFragment {
+    String mJuiceType;
+    private List<ArtesianBlend> mArtesianItemList;
+    private ArrayList<PremiumJuice> mPremiumItemList;
+    ArtesianAdapter artesianAdapter;
+    PremiumAdapter premiumAdapter;
 
     OnFragmentInteractionListener mListener;
-
-    private ListView listView;
 
     public ItemFragment newInstance(String mJuiceType) {
         ItemFragment fragment = new ItemFragment();
@@ -43,23 +38,17 @@ public class ItemFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
 
-        }
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_item, null, false);
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View v= inflater.inflate(R.layout.fragment_item, container, false);
-        artesianAdapter = new ArtesianAdapter(mArtesianItemList,inflater);
-        premiumAdapter = new PremiumAdapter(mPremiumItemList,inflater);
-        listView = (ListView)v.findViewById(R.id.listViewMain);
-        listView.setAdapter(new ArtesianAdapter(mArtesianItemList,getActivity().getLayoutInflater()));
-        // Inflate the layout for this fragment
-        return v;
+    public void onActivityCreated(Bundle savedInstanceState){
+        super.onActivityCreated(savedInstanceState);
+
     }
 
     @Override
@@ -88,17 +77,16 @@ public class ItemFragment extends Fragment {
     public void setupArtesianList(String artesian, List<ArtesianBlend> artesianBlends){
         mJuiceType = artesian;
         mArtesianItemList = artesianBlends;
-        Log.v("LIST_JUICE_TYPE", mJuiceType);
-        //listView.setAdapter(new ArtesianAdapter(mArtesianItemList,getActivity().getLayoutInflater()));
-        Toast.makeText(getActivity(),mJuiceType,Toast.LENGTH_SHORT).show();
+        artesianAdapter = new ArtesianAdapter(getActivity(),mArtesianItemList);
+        setListAdapter(artesianAdapter);
+
     }
 
     public void setupPremiumList(String premium, ArrayList<PremiumJuice> premiumJuices){
         mJuiceType = premium;
         mPremiumItemList = premiumJuices;
-        Log.v("LIST_JUICE_TYPE", mJuiceType);
-        //listView.setAdapter(new PremiumAdapter(mPremiumItemList, getActivity().getLayoutInflater()));
-        Toast.makeText(getActivity(),mJuiceType,Toast.LENGTH_SHORT).show();
+        premiumAdapter = new PremiumAdapter(getActivity(),mPremiumItemList);
+        setListAdapter(premiumAdapter);
     }
 
 }

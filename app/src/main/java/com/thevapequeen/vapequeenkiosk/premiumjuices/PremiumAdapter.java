@@ -4,6 +4,8 @@ package com.thevapequeen.vapequeenkiosk.premiumjuices;
  * Created by James Campbell for exclusive use by The Vape Queen. All rights reserved.
  */
 
+import android.app.Activity;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,12 +18,12 @@ import java.util.List;
 
 public class PremiumAdapter extends BaseAdapter {
 
+    Context context;
     private List<PremiumJuice> juiceItems;
-    private LayoutInflater vi;
 
-    public PremiumAdapter(List<PremiumJuice> juiceItems,LayoutInflater inflater) {
+    public PremiumAdapter(Context context, List<PremiumJuice> juiceItems) {
+        this.context = context;
         this.juiceItems = juiceItems;
-        vi = inflater;
     }
 
     /**
@@ -45,7 +47,7 @@ public class PremiumAdapter extends BaseAdapter {
      */
     @Override
     public long getItemId(int position) {
-        return position;
+        return juiceItems.indexOf(getItem(position));
     }
 
     /**
@@ -53,25 +55,24 @@ public class PremiumAdapter extends BaseAdapter {
      */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        final ViewItem itemAdapter;
 
         if (convertView == null) {
-            convertView = vi.inflate(R.layout.item_premium_juice, null);
-            itemAdapter = new ViewItem();
-            itemAdapter.jName = (TextView) convertView.findViewById(R.id.textViewPremiumName);
-            itemAdapter.jVG = (TextView) convertView.findViewById(R.id.textViewPremiumVG);
-            itemAdapter.jPG = (TextView) convertView.findViewById(R.id.textViewPremiumPG);
-            itemAdapter.jDescription = (TextView) convertView.findViewById(R.id.textViewPremiumDescription);
-            convertView.setTag(itemAdapter);
-        } else {
-            itemAdapter = (ViewItem) convertView.getTag();
+            LayoutInflater mInflater = (LayoutInflater)context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
+            convertView = mInflater.inflate(R.layout.item_premium_juice, null);
         }
+
+        TextView jName = (TextView) convertView.findViewById(R.id.textViewPremiumName);
+        TextView jVG = (TextView) convertView.findViewById(R.id.textViewPremiumVG);
+        TextView jPG = (TextView) convertView.findViewById(R.id.textViewPremiumPG);
+        TextView jDescription = (TextView) convertView.findViewById(R.id.textViewPremiumDescription);
+
         PremiumJuice currentJuice = juiceItems.get(position);
+
         // Add received info to UI
-        itemAdapter.jName.setText(currentJuice.getPjName());
-        itemAdapter.jVG.setText(currentJuice.getPjVGratio());
-        itemAdapter.jPG.setText(currentJuice.getPjPGratio());
-        itemAdapter.jDescription.setText(currentJuice.getPjDescription());
+        jName.setText(currentJuice.getPjName());
+        jVG.setText(currentJuice.getPjVGratio());
+        jPG.setText(currentJuice.getPjPGratio());
+        jDescription.setText(currentJuice.getPjDescription());
 
         return convertView;
     }
@@ -79,13 +80,6 @@ public class PremiumAdapter extends BaseAdapter {
     public void refreshDeviceList(List<PremiumJuice> list) {
         this.juiceItems = list;
         notifyDataSetChanged();
-    }
-
-    private class ViewItem {
-        TextView jName;
-        TextView jVG;
-        TextView jPG;
-        TextView jDescription;
     }
 
 

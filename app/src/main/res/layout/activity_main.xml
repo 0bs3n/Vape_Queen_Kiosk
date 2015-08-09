@@ -14,21 +14,30 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <fragment
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/fragment_topper"
-            android:name="com.thevapequeen.vapequeenkiosk.fragments.TopperFragment"
-            tools:layout="@layout/fragment_topper"
-            android:layout_gravity="center_horizontal" />
 
-        <fragment
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/fragment_item"
-            android:name="com.thevapequeen.vapequeenkiosk.fragments.ItemFragment"
-            tools:layout="@layout/fragment_item"
-            android:layout_gravity="center_horizontal|bottom" />
+            android:layout_height="match_parent"
+            android:layout_gravity="center">
+
+            <fragment
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/fragment_topper"
+                android:name="com.thevapequeen.vapequeenkiosk.fragments.TopperFragment"
+                tools:layout="@layout/fragment_topper"
+                android:layout_centerHorizontal="true" />
+
+            <fragment
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/fragment_item"
+                android:name="com.thevapequeen.vapequeenkiosk.fragments.ItemFragment"
+                tools:layout="@layout/fragment_item"
+                android:layout_below="@+id/fragment_topper" />
+
+        </RelativeLayout>
 
     </FrameLayout>
     <!-- android:layout_gravity="start" tells DrawerLayout to treat

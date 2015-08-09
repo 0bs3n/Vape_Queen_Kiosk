@@ -3,6 +3,9 @@ package com.thevapequeen.vapequeenkiosk.artesianblends;
 /**
  * Created by James Campbell for exclusive use by The Vape Queen. All rights reserved.
  */
+
+import android.app.Activity;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,14 +16,16 @@ import com.thevapequeen.vapequeenkiosk.R;
 
 import java.util.List;
 
+//import android.view.LayoutInflater;
+
 public class ArtesianAdapter extends BaseAdapter {
+    Context context;
+    List<ArtesianBlend> juiceItems;
+    //private LayoutInflater vi;
 
-    private List<ArtesianBlend> juiceItems;
-    private LayoutInflater vi;
-
-    public ArtesianAdapter(List<ArtesianBlend> juiceItems,LayoutInflater inflater) {
+    public ArtesianAdapter(Context context, List<ArtesianBlend> juiceItems) {
+        this.context = context;
         this.juiceItems = juiceItems;
-        vi = inflater;
     }
 
     /**
@@ -44,7 +49,7 @@ public class ArtesianAdapter extends BaseAdapter {
      */
     @Override
     public long getItemId(int position) {
-        return position;
+        return juiceItems.indexOf(getItem(position));
     }
 
     /**
@@ -52,27 +57,27 @@ public class ArtesianAdapter extends BaseAdapter {
      */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        final ViewItem itemAdapter;
 
         if (convertView == null) {
-            convertView = vi.inflate(R.layout.item_artesian_blend, parent);
-            itemAdapter = new ViewItem();
-            itemAdapter.jNumber = (TextView) convertView.findViewById(R.id.textViewHouseNumber);
-            itemAdapter.jName = (TextView) convertView.findViewById(R.id.textViewHouseName);
-            itemAdapter.jVG = (TextView) convertView.findViewById(R.id.textViewHouseVG);
-            itemAdapter.jPG = (TextView) convertView.findViewById(R.id.textViewHousePG);
-            itemAdapter.jDescription = (TextView) convertView.findViewById(R.id.textViewHouseDescription);
-            convertView.setTag(itemAdapter);
-        } else {
-            itemAdapter = (ViewItem) convertView.getTag();
+            LayoutInflater mInflater = (LayoutInflater)context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
+
+            convertView = mInflater.inflate(R.layout.item_artesian_blend, null);
+
         }
+        TextView jNumber = (TextView) convertView.findViewById(R.id.textViewHouseNumber);
+        TextView jName = (TextView) convertView.findViewById(R.id.textViewHouseName);
+        TextView jVG = (TextView) convertView.findViewById(R.id.textViewHouseVG);
+        TextView jPG = (TextView) convertView.findViewById(R.id.textViewHousePG);
+        TextView jDescription = (TextView) convertView.findViewById(R.id.textViewHouseDescription);
+
         ArtesianBlend currentJuice = juiceItems.get(position);
+
         // Add received info to UI
-        itemAdapter.jNumber.setText(currentJuice.getVqNumber());
-        itemAdapter.jName.setText(currentJuice.getVqName());
-        itemAdapter.jVG.setText(currentJuice.getVqVGratio());
-        itemAdapter.jPG.setText(currentJuice.getVqPGratio());
-        itemAdapter.jDescription.setText(currentJuice.getVqDescription());
+        jNumber.setText(currentJuice.getVqNumber());
+        jName.setText(currentJuice.getVqName());
+        jVG.setText(currentJuice.getVqVGratio());
+        jPG.setText(currentJuice.getVqPGratio());
+        jDescription.setText(currentJuice.getVqDescription());
 
         return convertView;
     }
@@ -82,13 +87,7 @@ public class ArtesianAdapter extends BaseAdapter {
         notifyDataSetChanged();
     }
 
-    private class ViewItem {
-        TextView jNumber;
-        TextView jName;
-        TextView jVG;
-        TextView jPG;
-        TextView jDescription;
-    }
+
 
 
 }
